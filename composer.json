@@ -1,0 +1,17 @@
+{
+    "name": "anomaly/editor-field-type",
+    "type": "streams-addon",
+    "description": "Editor field type.",
+    "authors": [
+        {
+            "name": "AnomalyLabs",
+            "email": "hello@anomaly.is"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
