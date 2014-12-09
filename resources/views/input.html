@@ -3,6 +3,4 @@
 {{ asset.add group="streams.js" file="field_type.editor::js/jquery-ace.min.js" }}
 {{ asset.add group="streams.js" file="field_type.editor::js/input.js" }}
 
-<textarea name="{{ name }}" class="ace-editor" data-lang="{{ lang }}" style="width: 100%; height: 500px;">
-    {{ value }}
-</textarea>
+<textarea name="{{ name }}" class="ace-editor" data-lang="{{ lang }}" style="width: 100%; height: 500px;">{{ value }}</textarea>
