@@ -14,7 +14,7 @@ class EditorFieldType extends \Anomaly\Streams\Platform\Addon\FieldType\FieldTyp
     {
         $data = parent::getInputData();
 
-        $data['lang'] = $this->getConfig('lang', 'javascript');
+        $data['lang'] = $this->pullConfig('lang', 'javascript');
 
         return $data;
     }
