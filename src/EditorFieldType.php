@@ -8,7 +8,7 @@ class EditorFieldType extends \Anomaly\Streams\Platform\Addon\FieldType\FieldTyp
      *
      * @var string
      */
-    protected $inputView = 'field_type.editor::input';
+    protected $inputView = 'anomaly.field_type.editor::input';
 
     public function getInputData()
     {
