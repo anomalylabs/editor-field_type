@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/editor-field-type",
+    "name": "anomaly/editor-field_type",
     "type": "streams-addon",
     "description": "Editor field type.",
     "authors": [
