@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\FieldType\Editor;
+<?php namespace Anomaly\EditorFieldType;
 
 class EditorFieldType extends \Anomaly\Streams\Platform\Addon\FieldType\FieldType
 {
