@@ -9,14 +9,4 @@ class EditorFieldType extends \Anomaly\Streams\Platform\Addon\FieldType\FieldTyp
      * @var string
      */
     protected $inputView = 'anomaly.field_type.editor::input';
-
-    public function getInputData()
-    {
-        $data = parent::getInputData();
-
-        $data['lang'] = $this->pullConfig('lang', 'javascript');
-
-        return $data;
-    }
 }
- 
