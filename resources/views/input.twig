@@ -1,13 +1,11 @@
 {{ add_asset("streams.js", "asset::ace/ace.js") }}
-{{ add_asset("streams.js", "asset::ace/mode-{lang}.js") }}
+{{ add_asset("streams.js", "asset::ace/mode-" ~ field_type.config.mode ~ ".js") }}
 {{ add_asset("streams.js", "anomaly.field_type.editor::js/jquery-ace.min.js") }}
 {{ add_asset("streams.js", "anomaly.field_type.editor::js/input.js") }}
 
 <textarea
         class="ace-editor"
         name="{{ field_type.getFieldName() }}"
-        data-lang="{{ field_type.locale }}"
-        style="width: 100%; height: 500px;"
-        >
-    {{ field_type.value }}
-</textarea>
+        data-mode="{{ field_type.config.mode }}"
+        style="width: 100%; height: {{ field_type.config.height ?: '400px' }};"
+        >{{ field_type.value }}</textarea>
