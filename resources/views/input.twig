@@ -7,5 +7,5 @@
         class="ace-editor"
         name="{{ field_type.getFieldName() }}"
         data-mode="{{ field_type.config.mode }}"
-        style="width: 100%; height: {{ field_type.config.height ?: '400px' }};"
+        style="width: 100%; height: {{ field_type.config.height ?: 400 }}px;"
         >{{ field_type.value }}</textarea>
