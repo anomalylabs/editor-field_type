@@ -1,7 +1,7 @@
-{{ add_asset("streams.js", "asset::ace/ace.js") }}
-{{ add_asset("streams.js", "asset::ace/mode-" ~ field_type.config.mode ~ ".js") }}
-{{ add_asset("streams.js", "anomaly.field_type.editor::js/jquery-ace.min.js") }}
-{{ add_asset("streams.js", "anomaly.field_type.editor::js/input.js") }}
+{{ asset_add("streams.js", "asset::ace/ace.js") }}
+{{ asset_add("streams.js", "asset::ace/mode-" ~ field_type.config.mode ~ ".js") }}
+{{ asset_add("streams.js", "anomaly.field_type.editor::js/jquery-ace.min.js") }}
+{{ asset_add("streams.js", "anomaly.field_type.editor::js/input.js") }}
 
 <textarea
         class="ace-editor"
