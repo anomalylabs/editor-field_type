@@ -17,4 +17,5 @@ class EditorFieldType extends \Anomaly\Streams\Platform\Addon\FieldType\FieldTyp
      * @var string
      */
     protected $inputView = 'anomaly.field_type.editor::input';
+
 }
