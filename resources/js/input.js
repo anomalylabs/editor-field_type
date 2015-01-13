@@ -4,6 +4,6 @@ $(document).ready(function () {
 
         var lang = $(this).data('mode');
 
-        $(this).ace({lang: lang});
+        $(this).ace({ lang: lang });
     });
 });
