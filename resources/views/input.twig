@@ -7,6 +7,6 @@
         class="ace-editor"
         name="{{ field_type.getInputName() }}"
         data-mode="{{ field_type.config.mode }}"
-        data-theme="{{ field_type.config.theme }}"
+        data-theme="{{ field_type.config.theme ?: 'monokai' }}"
         style="width: 100%; height: {{ field_type.config.height ?: 400 }}px;"
         >{{ field_type.value }}</textarea>
