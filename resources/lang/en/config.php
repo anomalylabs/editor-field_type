@@ -6,7 +6,7 @@ return [
     ],
     'theme'  => [
         'label'  => 'Theme',
-        'bright' => 'bright',
+        'bright' => 'Bright',
         'dark'   => 'Dark'
     ],
     'height' => [
