@@ -28,7 +28,7 @@ class EditorFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'theme'  => 'chrome',
+        'theme'  => 'monokai',
         'mode'   => 'html',
         'height' => 500
     ];
