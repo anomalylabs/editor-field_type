@@ -62,7 +62,7 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function set(EloquentModel $entry, $value)
     {
-        if ($entry instanceof EntryInterface) {
+        if ($entry instanceof EntryInterface && $this->fieldType->setEntry($entry)) {
 
             $path = $this->fieldType->getStoragePath($entry);
 
@@ -70,7 +70,9 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
                 $this->files->makeDirectory(dirname($path), 0777, true, true);
             }
 
-            $this->files->put($path, $value);
+            if ($path) {
+                $this->files->put($path, $value);
+            }
         }
 
         parent::set($entry, $value);
@@ -84,7 +86,7 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get(EloquentModel $entry)
     {
-        if ($entry instanceof EntryInterface) {
+        if ($entry instanceof EntryInterface && $this->fieldType->setEntry($entry)) {
 
             $path = $this->fieldType->getStoragePath($entry);
 
