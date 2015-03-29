@@ -24,7 +24,7 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
         /* @var Repository $config */
         $config = $this->app->make('config');
 
-        $target = $this->app->make('streams.asset.path') . '/ace';
+        $target = $this->app->make('Anomaly\Streams\Platform\Application\Application')->getAssetsPath('ace');
 
         if ($config->get('app.debug') && !is_dir($target)) {
 
