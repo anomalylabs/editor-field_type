@@ -34,6 +34,15 @@ class EditorFieldType extends FieldType
     ];
 
     /**
+     * The mode to extension definitons.
+     *
+     * @var array
+     */
+    protected $extensions = [
+        'javascript' => 'js'
+    ];
+
+    /**
      * The application utility.
      *
      * @var Application
@@ -80,8 +89,20 @@ class EditorFieldType extends FieldType
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $folder    = str_slug($this->entry->getTitle(), '_');
-        $file      = $this->getField() . '.' . array_get($this->getConfig(), 'mode');
+        $file      = $this->getField() . '.' . $this->getFileExtension();
 
         return $this->application->getStoragePath("{$namespace}/{$slug}/{$folder}/{$file}");
+    }
+
+    /**
+     * Get the file extension for the config mode.
+     *
+     * @return mixed
+     */
+    protected function getFileExtension()
+    {
+        $mode = array_get($this->getConfig(), 'mode');
+
+        return array_get($this->extensions, $mode, $mode);
     }
 }
