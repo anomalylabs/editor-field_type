@@ -73,6 +73,10 @@ class EditorFieldType extends FieldType
             return null;
         }
 
+        if (!$this->entry->getId()) {
+            return null;
+        }
+
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $folder    = str_slug($this->entry->getTitle(), '_');
