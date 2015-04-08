@@ -105,4 +105,14 @@ class EditorFieldType extends FieldType
 
         return array_get($this->extensions, $mode, $mode);
     }
+
+    /**
+     * Get the application storage page.
+     *
+     * @return string
+     */
+    public function getAppStoragePath()
+    {
+        return str_replace(base_path(), '', $this->getStoragePath());
+    }
 }
