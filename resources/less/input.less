@@ -1,0 +1,34 @@
+.editor-field-type {
+    .wrapper {
+        position: relative;
+
+        > a {
+            top: 15px;
+            right: 15px;
+            opacity: 0.5;
+            z-index: 100;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 16px;
+            position: absolute;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    &.fullscreen {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        position: fixed;
+
+        > label {
+            display: none;
+        }
+    }
+}
