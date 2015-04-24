@@ -16,6 +16,14 @@ class EditorFieldType extends FieldType
 {
 
     /**
+     * Defer processing so the
+     * title has been set already.
+     *
+     * @var bool
+     */
+    protected $deferred = true;
+
+    /**
      * The input view.
      *
      * @var string
@@ -82,7 +90,7 @@ class EditorFieldType extends FieldType
             return null;
         }
 
-        if (!$this->entry->getId()) {
+        if (!$this->entry->getTitle()) {
             return null;
         }
 

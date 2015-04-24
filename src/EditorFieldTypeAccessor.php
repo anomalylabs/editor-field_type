@@ -62,7 +62,7 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function set(EloquentModel $entry, $value)
     {
-        if ($entry instanceof EntryInterface && $this->fieldType->setEntry($entry)) {
+        if ($entry instanceof EntryInterface && $entry->getTitle() && $this->fieldType->setEntry($entry)) {
 
             $path = $this->fieldType->getStoragePath($entry);
 
@@ -86,7 +86,7 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get(EloquentModel $entry)
     {
-        if ($entry instanceof EntryInterface && $this->fieldType->setEntry($entry)) {
+        if ($entry instanceof EntryInterface && $entry->getTitle() && $this->fieldType->setEntry($entry)) {
 
             $path = $this->fieldType->getStoragePath($entry);
 
