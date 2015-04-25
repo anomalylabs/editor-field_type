@@ -22,42 +22,6 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
     use DispatchesCommands;
 
     /**
-     * The file system.
-     *
-     * @var Filesystem
-     */
-    protected $files;
-
-    /**
-     * The field type.
-     *
-     * @var EditorFieldType
-     */
-    protected $fieldType;
-
-    /**
-     * The application utility.
-     *
-     * @var Application
-     */
-    protected $application;
-
-    /**
-     * Create a new EditorFieldTypeAccessor instance.
-     *
-     * @param FieldType   $fieldType
-     * @param Application $application
-     * @param Filesystem  $files
-     */
-    public function __construct(FieldType $fieldType, Application $application, Filesystem $files)
-    {
-        $this->files       = $files;
-        $this->application = $application;
-
-        parent::__construct($fieldType);
-    }
-
-    /**
      * Get the value off the entry.
      *
      * @param EloquentModel $entry
