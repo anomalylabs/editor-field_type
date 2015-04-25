@@ -1,11 +1,12 @@
 <?php namespace Anomaly\EditorFieldType;
 
+use Anomaly\EditorFieldType\Command\GetFile;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAccessor;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Model\EloquentModel;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
  * Class EditorFieldTypeAccessor
@@ -17,6 +18,8 @@ use Illuminate\Filesystem\Filesystem;
  */
 class EditorFieldTypeAccessor extends FieldTypeAccessor
 {
+
+    use DispatchesCommands;
 
     /**
      * The file system.
@@ -55,47 +58,13 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
     }
 
     /**
-     * Set the value on the entry.
-     *
-     * @param EloquentModel $entry
-     * @param               $value
-     */
-    public function set(EloquentModel $entry, $value)
-    {
-        if ($entry instanceof EntryInterface && $entry->getTitle() && $this->fieldType->setEntry($entry)) {
-
-            $path = $this->fieldType->getStoragePath($entry);
-
-            if ($path && !is_dir(dirname($path))) {
-                $this->files->makeDirectory(dirname($path), 0777, true, true);
-            }
-
-            if ($path) {
-                $this->files->put($path, $value);
-            }
-        }
-
-        parent::set($entry, $value);
-    }
-
-    /**
      * Get the value off the entry.
      *
      * @param EloquentModel $entry
-     * @return mixed
+     * @return string
      */
     public function get(EloquentModel $entry)
     {
-        if ($entry instanceof EntryInterface && $entry->getTitle() && $this->fieldType->setEntry($entry)) {
-
-            $path = $this->fieldType->getStoragePath($entry);
-
-            if ($path && file_exists($path) && $value = $this->files->get($path)) {
-
-                return $value;
-            }
-        }
-
-        return parent::get($entry);
+        return $this->dispatch(new GetFile($this->fieldType));
     }
 }
