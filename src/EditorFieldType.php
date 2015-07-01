@@ -42,7 +42,8 @@ class EditorFieldType extends FieldType
      * @var array
      */
     protected $extensions = [
-        'javascript' => 'js'
+        'javascript' => 'js',
+        'markdown'   => 'md'
     ];
 
     /**
