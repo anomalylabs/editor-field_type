@@ -1,11 +1,12 @@
 <?php namespace Anomaly\EditorFieldType;
 
 use Anomaly\EditorFieldType\Command\DeleteDirectory;
-use Anomaly\EditorFieldType\Command\PutFile;
+use Anomaly\EditorFieldType\Command\PostFile;
 use Anomaly\EditorFieldType\Command\RenameDirectory;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
 
 /**
  * Class EditorFieldType
@@ -17,6 +18,13 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
  */
 class EditorFieldType extends FieldType
 {
+
+    /**
+     * The database column type.
+     *
+     * @var string
+     */
+    protected $columnType = 'text';
 
     /**
      * The input view.
@@ -76,7 +84,7 @@ class EditorFieldType extends FieldType
         }
 
         // If the entry is not an EntryInterface skip it.
-        if (!$this->entry instanceof EntryInterface) {
+        if (!$this->entry instanceof EntryInterface && !$this->entry instanceof EntryTranslationsModel) {
             return null;
         }
 
@@ -131,7 +139,7 @@ class EditorFieldType extends FieldType
      */
     protected function getStorageFileName()
     {
-        return $this->getField() . '.' . $this->getFileExtension();
+        return $this->getField() . $this->getSuffix() . '.' . $this->getFileExtension();
     }
 
     /**
@@ -139,7 +147,15 @@ class EditorFieldType extends FieldType
      */
     public function onEntrySaved()
     {
-        $this->dispatch(new PutFile($this));
+        //$this->dispatch(new PutFile($this));
+    }
+
+    /**
+     * Fired after a form is saved.
+     */
+    public function onFormSaved()
+    {
+        $this->dispatch(new PostFile($this));
     }
 
     /**
