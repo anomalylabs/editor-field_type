@@ -129,7 +129,13 @@ class EditorFieldType extends FieldType
      */
     protected function getStorageDirectoryName()
     {
-        return str_slug($this->entry->getTitle() . '_' . $this->entry->getId(), '_');
+        $entry = $this->getEntry();
+
+        if ($entry instanceof EntryTranslationsModel) {
+            return str_slug($entry->getParent()->getTitle() . '_' . $entry->getParent()->getId(), '_');
+        } else {
+            return str_slug($entry->getTitle() . '_' . $entry->getId(), '_');
+        }
     }
 
     /**
@@ -140,14 +146,6 @@ class EditorFieldType extends FieldType
     protected function getStorageFileName()
     {
         return $this->getField() . $this->getSuffix() . '.' . $this->getFileExtension();
-    }
-
-    /**
-     * Fired after an entry is saved.
-     */
-    public function onEntrySaved()
-    {
-        //$this->dispatch(new PutFile($this));
     }
 
     /**
