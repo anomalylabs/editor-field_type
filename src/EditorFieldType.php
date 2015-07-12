@@ -1,12 +1,8 @@
 <?php namespace Anomaly\EditorFieldType;
 
-use Anomaly\EditorFieldType\Command\DeleteDirectory;
-use Anomaly\EditorFieldType\Command\PostFile;
 use Anomaly\EditorFieldType\Command\RenameDirectory;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
-use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
 
 /**
  * Class EditorFieldType
@@ -72,70 +68,48 @@ class EditorFieldType extends FieldType
     }
 
     /**
+     * Get the file path.
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        $slug      = $this->entry->getStreamSlug();
+        $namespace = $this->entry->getStreamNamespace();
+        $directory = $this->entry->getEntryId();
+        $file      = $this->getFileName();
+
+        return "{$namespace}/types/{$slug}/{$directory}/{$file}";
+    }
+
+    /**
      * Get the storage path.
      *
-     * @return null|string
+     * @return string
      */
     public function getStoragePath()
     {
-        // No entry, no path.
-        if (!$this->entry) {
-            return null;
-        }
-
-        // If the entry is not an EntryInterface skip it.
-        if (!$this->entry instanceof EntryInterface && !$this->entry instanceof EntryTranslationsModel) {
-            return null;
-        }
-
-        if (!$this->entry->getTitle()) {
-            return null;
-        }
-
-        $slug      = $this->entry->getStreamSlug();
-        $namespace = $this->entry->getStreamNamespace();
-        $directory = $this->getStorageDirectoryName();
-        $file      = $this->getStorageFileName();
-
-        return $this->application->getStoragePath("{$namespace}/{$slug}/{$directory}/{$file}");
+        return $this->application->getStoragePath($this->getFilePath());
     }
 
     /**
-     * Get the file extension for the config mode.
-     *
-     * @return mixed
-     */
-    protected function getFileExtension()
-    {
-        $mode = array_get($this->getConfig(), 'mode');
-
-        return array_get($this->extensions, $mode, $mode);
-    }
-
-    /**
-     * Get the application storage page.
+     * Get the view path.
      *
      * @return string
      */
-    public function getAppStoragePath()
+    public function getViewPath()
     {
-        return str_replace(base_path(), '', $this->getStoragePath());
+        return 'storage::' . str_replace(['.html', '.twig'], '', $this->getFilePath());
     }
 
     /**
-     * Get the storage directory name.
+     * Get the asset path.
      *
      * @return string
      */
-    protected function getStorageDirectoryName()
+    public function getAssetPath()
     {
-        $entry = $this->getEntry();
-
-        if ($entry instanceof EntryTranslationsModel) {
-            return str_slug($entry->getParent()->getTitle() . '_' . $entry->getParent()->getId(), '_');
-        } else {
-            return str_slug($entry->getTitle() . '_' . $entry->getId(), '_');
-        }
+        return 'storage::' . $this->getFilePath();
     }
 
     /**
@@ -143,32 +117,20 @@ class EditorFieldType extends FieldType
      *
      * @return string
      */
-    protected function getStorageFileName()
+    protected function getFileName()
     {
-        return $this->getField() . $this->getSuffix() . '.' . $this->getFileExtension();
+        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.' . $this->getFileExtension();
     }
 
     /**
-     * Fired after a form is saved.
+     * Get the file extension for the config mode.
+     *
+     * @return mixed
      */
-    public function onFormSaved()
+    public function getFileExtension()
     {
-        $this->dispatch(new PostFile($this));
-    }
+        $mode = array_get($this->getConfig(), 'mode');
 
-    /**
-     * Fired after an entry is deleted.
-     */
-    public function onEntryDeleted()
-    {
-        $this->dispatch(new DeleteDirectory($this));
-    }
-
-    /**
-     * Fired after an entry is deleted.
-     */
-    public function onEntryUpdated()
-    {
-        $this->dispatch(new RenameDirectory($this));
+        return array_get($this->extensions, $mode, $mode);
     }
 }

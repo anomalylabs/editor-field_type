@@ -5,14 +5,14 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 
 /**
- * Class PostFile
+ * Class PutFile
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\EditorFieldType\Command
  */
-class PostFile implements SelfHandling
+class PutFile implements SelfHandling
 {
 
     /**
@@ -23,7 +23,7 @@ class PostFile implements SelfHandling
     protected $fieldType;
 
     /**
-     * Create a new PostFile instance.
+     * Create a new PutFile instance.
      *
      * @param EditorFieldType $fieldType
      */
@@ -39,14 +39,15 @@ class PostFile implements SelfHandling
      */
     public function handle(Filesystem $files)
     {
-        $path = $this->fieldType->getStoragePath();
+        $entry = $this->fieldType->getEntry();
+        $path  = $this->fieldType->getStoragePath();
 
         if ($path && !is_dir(dirname($path))) {
             $files->makeDirectory(dirname($path), 0777, true, true);
         }
 
         if ($path) {
-            $files->put($path, $this->fieldType->getPostValue());
+            $files->put($path, array_get($entry->getAttributes(), $this->fieldType->getField()));
         }
     }
 }

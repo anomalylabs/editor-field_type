@@ -3,14 +3,14 @@
 return [
     'mode'   => [
         'label'        => 'Language Mode',
-        'instructions' => 'What language mode do you want the editor to use? This will determine the syntax rules and behavior for the editor.'
+        'instructions' => 'Specify the language mode for the editor. The mode determines the syntax rules, highlighting, and behavior.'
     ],
     'theme'  => [
-        'label'        => 'Editor Theme',
-        'instructions' => 'Choose the editor theme to use.'
+        'label'        => 'Theme',
+        'instructions' => 'Specify the editor theme.'
     ],
     'height' => [
-        'label'        => 'Editor Height',
-        'instructions' => 'Define the initial editor height.'
+        'label'        => 'Height',
+        'instructions' => 'Specify the editor\'s height.'
     ]
 ];

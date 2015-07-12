@@ -14,8 +14,10 @@
             data-mode="{{ field_type.config.mode }}"
             data-theme="{{ field_type.config.theme }}"
             style="width: 100%; height: {{ field_type.config.height }}px;"
+            {{ field_type.disabled ? 'disabled' }}
+            {{ field_type.readonly ? 'readonly' }}
             >{{ field_type.value }}</textarea>
 
 </div>
 
-<small><a href="#">{{ field_type.getAppStoragePath() }}</a></small>
+<small class="text-muted">{{ field_type.asset_path }}</small>

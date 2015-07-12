@@ -2,8 +2,9 @@
 
 return [
     'mode'   => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
             'options' => [
                 'abap'         => 'ABAP',
                 'actionscript' => 'ActionScript',
@@ -128,8 +129,9 @@ return [
         ]
     ],
     'theme'  => [
-        'type'   => 'anomaly.field_type.select',
-        'config' => [
+        'type'     => 'anomaly.field_type.select',
+        'required' => true,
+        'config'   => [
             'options' => [
                 'chrome'                  => 'Chrome',
                 'clouds'                  => 'Clouds',
@@ -167,10 +169,12 @@ return [
         ]
     ],
     'height' => [
-        'type'   => 'anomaly.field_type.integer',
-        'config' => [
-            'min'  => 500,
-            'step' => 10
+        'type'     => 'anomaly.field_type.integer',
+        'required' => true,
+        'config'   => [
+            'default_value' => 500,
+            'min'           => 200,
+            'step'          => 50
         ]
     ]
 ];

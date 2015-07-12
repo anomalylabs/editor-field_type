@@ -1,15 +1,14 @@
 {
     "name": "anomaly/editor-field_type",
     "type": "streams-addon",
-    "description": "An editor field type powered by Ace.",
+    "description": "A code editor field type powered by Ace.",
     "keywords": [
-        "streams-addon",
-        "editor",
-        "pyrocms",
-        "laravel"
+        "streams field type",
+        "streams addon",
+        "field type"
     ],
     "homepage": "http://anomaly.is/",
-    "version": "1.0.0-alpha",
+    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -29,8 +28,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-1.0/master": "1.0.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

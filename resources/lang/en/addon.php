@@ -2,5 +2,5 @@
 
 return [
     'name'        => 'Editor',
-    'description' => 'An editor field type powered by Ace.'
+    'description' => 'A code editor field type.'
 ];

@@ -22,12 +22,16 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     protected $object;
 
     /**
-     * Return the storage path.
+     * Return the applicable path.
      *
      * @return null|string
      */
     public function path()
     {
-        return $this->object->getStoragePath();
+        if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
+            return $this->object->getViewPath();
+        } else {
+            return $this->object->getAssetPath();
+        }
     }
 }
