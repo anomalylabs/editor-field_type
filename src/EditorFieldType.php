@@ -70,10 +70,14 @@ class EditorFieldType extends FieldType
     /**
      * Get the file path.
      *
-     * @return string
+     * @return null|string
      */
     public function getFilePath()
     {
+        if (!$this->entry->exists) {
+            return null;
+        }
+
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
@@ -85,11 +89,15 @@ class EditorFieldType extends FieldType
     /**
      * Get the storage path.
      *
-     * @return string
+     * @return null|string
      */
     public function getStoragePath()
     {
-        return $this->application->getStoragePath($this->getFilePath());
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+
+        return $this->application->getStoragePath();
     }
 
     /**
@@ -99,7 +107,11 @@ class EditorFieldType extends FieldType
      */
     public function getViewPath()
     {
-        return 'storage::' . str_replace(['.html', '.twig'], '', $this->getFilePath());
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+
+        return 'storage::' . str_replace(['.html', '.twig'], '', $path);
     }
 
     /**
@@ -109,7 +121,11 @@ class EditorFieldType extends FieldType
      */
     public function getAssetPath()
     {
-        return 'storage::' . $this->getFilePath();
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+        
+        return 'storage::' . $path;
     }
 
     /**
