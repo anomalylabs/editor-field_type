@@ -97,7 +97,7 @@ class EditorFieldType extends FieldType
             return null;
         }
 
-        return $this->application->getStoragePath();
+        return $this->application->getStoragePath($path);
     }
 
     /**
