@@ -124,7 +124,7 @@ class EditorFieldType extends FieldType
         if (!$path = $this->getFilePath()) {
             return null;
         }
-        
+
         return 'storage::' . $path;
     }
 
