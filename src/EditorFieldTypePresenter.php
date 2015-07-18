@@ -1,6 +1,7 @@
 <?php namespace Anomaly\EditorFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
+use Anomaly\Streams\Platform\Support\String;
 use Illuminate\View\Factory;
 
 /**
@@ -22,6 +23,13 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     protected $view;
 
     /**
+     * The string parser.
+     *
+     * @var String
+     */
+    protected $string;
+
+    /**
      * The decorated field type.
      * This is for IDE hinting.
      *
@@ -33,11 +41,13 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      * Create a new EditorFieldTypePresenter instance.
      *
      * @param Factory $view
+     * @param String  $string
      * @param         $object
      */
-    public function __construct(Factory $view, $object)
+    public function __construct(Factory $view, String $string, $object)
     {
-        $this->view = $view;
+        $this->view   = $view;
+        $this->string = $string;
 
         parent::__construct($object);
     }
@@ -64,5 +74,15 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     public function render()
     {
         return $this->view->make($this->path())->render();
+    }
+
+    /**
+     * Return the parse the content.
+     *
+     * @return string
+     */
+    public function parse()
+    {
+        return $this->string->render(file_get_contents($this->path()));
     }
 }
