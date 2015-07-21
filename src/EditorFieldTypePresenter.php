@@ -83,6 +83,6 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function parse()
     {
-        return $this->string->render(file_get_contents($this->path()));
+        return $this->string->render(file_get_contents($this->object->getAssetPath()));
     }
 }
