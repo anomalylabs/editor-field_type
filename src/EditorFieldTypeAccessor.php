@@ -1,8 +1,9 @@
 <?php namespace Anomaly\EditorFieldType;
 
 use Anomaly\EditorFieldType\Command\GetFile;
+use Anomaly\EditorFieldType\Command\PutFile;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAccessor;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class EditorFieldTypeAccessor
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class EditorFieldTypeAccessor extends FieldTypeAccessor
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Get the value off the entry.
@@ -24,6 +25,10 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get()
     {
+        if (!file_exists($this->fieldType->getStoragePath())) {
+            $this->dispatch(new PutFile($this->fieldType));
+        }
+
         return $this->dispatch(new GetFile($this->fieldType));
     }
 }
