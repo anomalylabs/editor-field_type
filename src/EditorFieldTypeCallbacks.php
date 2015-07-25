@@ -2,7 +2,7 @@
 
 use Anomaly\EditorFieldType\Command\DeleteDirectory;
 use Anomaly\EditorFieldType\Command\PutFile;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class EditorFieldTypeCallbacks
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class EditorFieldTypeCallbacks
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Fired after an entry is saved.
