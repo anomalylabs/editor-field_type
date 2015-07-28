@@ -14,7 +14,7 @@ Returns the `storage::` prefixed path to the file. If the file is supported by t
 // Twig Usage
 {% include entry.example.path %}
 
-// API Usage
+// API usage
 echo $entry->example->path;
 ```
 
@@ -26,7 +26,7 @@ Returns the non-prefixed path to the file including extension.
 // Twig Usage
 {% include entry.example.storage_path %}
 
-// API Usage
+// API usage
 echo $entry->example->storage_path;
 ```
 
@@ -38,7 +38,7 @@ Returns the storage file's rendered content. This method should only be used for
 // Twig Usage
 {{ entry.example.rendered|raw }}
 
-// API Usage
+// API usage
 echo $entry->example->rendered;
 ```
 
@@ -50,7 +50,7 @@ Returns the content of the storage passed through the parser. Use caution when a
 // Twig Usage
 {{ entry.example.parsed|raw }}
 
-// API Usage
+// API usage
 $entry->example->parsed;
 ```
 
@@ -62,6 +62,6 @@ Returns the content of the storage file.
 // Twig Usage
 {{ entry.example.content }}
 
-// API Usage
+// API usage
 $entry->example->content;
 ```
