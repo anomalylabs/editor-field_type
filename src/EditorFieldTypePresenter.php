@@ -104,7 +104,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     public function __toString()
     {
         if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
-            return $this->render();
+            return $this->rendered();
         } else {
             return $this->content();
         }
