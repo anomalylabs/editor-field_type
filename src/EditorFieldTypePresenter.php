@@ -71,19 +71,29 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      *
      * @return string
      */
-    public function render()
+    public function rendered()
     {
         return $this->view->make($this->path())->render();
     }
 
     /**
-     * Return the parse the content.
+     * Return the parsed content.
      *
      * @return string
      */
-    public function parse()
+    public function parsed()
     {
-        return $this->string->render(file_get_contents($this->object->getStoragePath()));
+        return $this->string->render($this->content());
+    }
+
+    /**
+     * Return the content.
+     *
+     * @return string
+     */
+    public function content()
+    {
+        return file_get_contents($this->object->getStoragePath());
     }
 
     /**
@@ -96,7 +106,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
         if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
             return $this->render();
         } else {
-            return $this->parse();
+            return $this->content();
         }
     }
 }

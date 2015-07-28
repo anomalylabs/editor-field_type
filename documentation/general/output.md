@@ -1,41 +1,67 @@
 # Output
 
-This field type returns the content of the editor.
+This field returns the storage file rendered through the view system if the storage file uses valid view extension.
 
-**Examples:**
+If the storage file does NOT use a valid view extension then the contents of the file will be returned.
+
+By default PHP, HTML, Twig, Markdown and Blade modes are supported by the view system.
 
 ### `path`
 
-Return the applicable path.
+Returns the `storage::` prefixed path to the file. If the file is supported by the view system the path omit the extension.
 
 ```
 // Twig Usage
-{{ entry.example.path }}
+{% include entry.example.path %}
 
 // API Usage
-$entry->example->path();
+echo $entry->example->path;
 ```
 
-### `render`
+### `storage_path`
 
-Return the rendered content.
+Returns the non-prefixed path to the file including extension.
 
 ```
 // Twig Usage
-{{ entry.example.render }}
+{% include entry.example.storage_path %}
 
 // API Usage
-$entry->example->render();
+echo $entry->example->storage_path;
 ```
 
-### `parse`
+### `rendered`
 
-Return the parsed content.
+Returns the storage file's rendered content. This method should only be used for files supported by the view system.
 
 ```
 // Twig Usage
-{{ entry.example.parse }}
+{{ entry.example.rendered|raw }}
 
 // API Usage
-$entry->example->parse();
+echo $entry->example->rendered;
+```
+
+### `parsed`
+
+Returns the content of the storage passed through the parser. Use caution when allowing access to be parser.
+
+```
+// Twig Usage
+{{ entry.example.parsed|raw }}
+
+// API Usage
+$entry->example->parsed;
+```
+
+### `content`
+
+Returns the content of the storage file.
+
+```
+// Twig Usage
+{{ entry.example.content }}
+
+// API Usage
+$entry->example->content;
 ```

@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'name'        => 'Editor',
+    'title'       => 'Editor',
+    'name'        => 'Editor Field Type',
     'description' => 'A code editor field type.'
 ];

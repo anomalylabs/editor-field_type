@@ -41,13 +41,14 @@ class EditorFieldType extends FieldType
     ];
 
     /**
-     * The mode to extension definitons.
+     * The mode to extension definitions.
      *
      * @var array
      */
     protected $extensions = [
         'javascript' => 'js',
-        'markdown'   => 'md'
+        'markdown'   => 'md',
+        'sass'       => 'scss'
     ];
 
     /**
