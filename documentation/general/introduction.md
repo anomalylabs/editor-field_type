@@ -1,2 +1,0 @@
-# Editor Field Type
-
