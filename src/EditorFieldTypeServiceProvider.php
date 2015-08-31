@@ -34,7 +34,5 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
 
             $files->copyDirectory($this->addon->getPath('resources/js/ace'), $target);
         }
-
-        parent::register();
     }
 }
