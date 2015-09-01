@@ -34,14 +34,6 @@ class EditorFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get()
     {
-        if (!file_exists($this->fieldType->getStoragePath())) {
-            $this->dispatch(new PutFile($this->fieldType));
-        }
-
-        if (config('app.debug')) {
-            return $this->dispatch(new SyncFile($this->fieldType));
-        }
-
-        return $this->dispatch(new GetFile($this->fieldType));
+        return $this->dispatch(new SyncFile($this->fieldType));
     }
 }
