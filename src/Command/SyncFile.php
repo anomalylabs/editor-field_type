@@ -64,8 +64,10 @@ class SyncFile implements SelfHandling
 
             $this->dispatch(new PutFile($this->fieldType));
 
-            return $entry->getRawAttribute($this->fieldType->getField(), false);
+            $content = $entry->getRawAttribute($this->fieldType->getField(), false);
         }
+
+        $this->dispatch(new ClearCache());
 
         return $content;
     }
