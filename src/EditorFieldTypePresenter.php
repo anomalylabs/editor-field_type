@@ -83,7 +83,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function parsed()
     {
-        return $this->string->render($this->content());
+        return $this->string->render($this->content(), []);
     }
 
     /**
@@ -103,6 +103,10 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function __toString()
     {
+        if (!$this->object->getValue()) {
+            return '';
+        }
+
         if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
             return $this->rendered();
         } else {
