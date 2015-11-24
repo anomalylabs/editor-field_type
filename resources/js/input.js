@@ -5,7 +5,7 @@ $(function () {
 
         var lang = $(this).data('mode');
         var theme = $(this).data('theme');
-        var wrapper = $(this).closest('.editor-field-type ');
+        var wrapper = $(this).closest('.editor-field_type ');
 
         var editor = $(this).ace({
             lang: lang,
