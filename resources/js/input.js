@@ -1,11 +1,11 @@
 $(function () {
 
     // Initialize editors.
-    $('.editor-field_type textarea').each(function () {
+    $('.editor-field_type_type textarea').each(function () {
 
         var lang = $(this).data('mode');
         var theme = $(this).data('theme');
-        var wrapper = $(this).closest('.editor-field_type ');
+        var wrapper = $(this).closest('.editor-field_type_type ');
 
         var editor = $(this).ace({
             lang: lang,
@@ -18,7 +18,7 @@ $(function () {
 
             e.preventDefault();
 
-            var group = $(this).closest('.editor-field-type');
+            var group = $(this).closest('.editor-field_type-type');
             var icon = $(this).find('i');
 
             // Fullscreen the field group.
