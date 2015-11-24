@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize editors.
-    $('.editor-field-type textarea').each(function () {
+    $('.editor-field_type textarea').each(function () {
 
         var lang = $(this).data('mode');
         var theme = $(this).data('theme');
