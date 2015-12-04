@@ -2,7 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Support\Decorator;
-use Anomaly\Streams\Platform\Support\String;
+use Anomaly\Streams\Platform\Support\Template;
 use Illuminate\View\Factory;
 
 /**
@@ -24,13 +24,6 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     protected $view;
 
     /**
-     * The string parser.
-     *
-     * @var String
-     */
-    protected $string;
-
-    /**
      * The decorated field type.
      * This is for IDE hinting.
      *
@@ -39,16 +32,23 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     protected $object;
 
     /**
+     * The template parser.
+     *
+     * @var Template
+     */
+    protected $template;
+
+    /**
      * Create a new EditorFieldTypePresenter instance.
      *
-     * @param Factory $view
-     * @param String  $string
-     * @param         $object
+     * @param Factory  $view
+     * @param Template $template
+     * @param          $object
      */
-    public function __construct(Factory $view, String $string, $object)
+    public function __construct(Factory $view, Template $template, $object)
     {
-        $this->view   = $view;
-        $this->string = $string;
+        $this->view     = $view;
+        $this->template = $template;
 
         parent::__construct($object);
     }
@@ -86,7 +86,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function parsed(array $payload = [])
     {
-        return $this->string->render($this->content(), (new Decorator())->decorate($payload));
+        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
     }
 
     /**
