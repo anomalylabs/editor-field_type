@@ -75,7 +75,7 @@ class EditorFieldType extends FieldType
      */
     public function getFilePath()
     {
-        if (!is_object($this->entry) || !$this->entry->getId()) {
+        if ($this->entry === null || !is_object($this->entry) || !$this->entry->getId()) {
             return null;
         }
 
