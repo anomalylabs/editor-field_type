@@ -73,9 +73,31 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      * @param array $payload
      * @return string
      */
+    public function render(array $payload = [])
+    {
+        return $this->rendered($payload);
+    }
+
+    /**
+     * Return the rendered content.
+     *
+     * @param array $payload
+     * @return string
+     */
     public function rendered(array $payload = [])
     {
         return $this->view->make($this->path(), $payload)->render();
+    }
+
+    /**
+     * Return the parsed content.
+     *
+     * @param array $payload
+     * @return string
+     */
+    public function parse(array $payload = [])
+    {
+        return $this->parsed($payload);
     }
 
     /**
@@ -111,7 +133,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
         }
 
         if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
-            return $this->rendered();
+            return $this->render();
         } else {
             return $this->content();
         }
