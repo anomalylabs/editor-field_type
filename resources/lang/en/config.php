@@ -12,5 +12,9 @@ return [
     'height' => [
         'label'        => 'Height',
         'instructions' => 'Specify the editor\'s height.'
+    ],
+    'word_wrap' => [
+        'label' => 'Word Wrap',
+        'instructions' => 'Soft wrap the content of the editor.'
     ]
 ];
