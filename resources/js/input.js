@@ -10,10 +10,10 @@ $(function () {
         var editor = $(this).ace({
             lang: lang,
             theme: theme,
-            width: $(this).closest('editor'),
+            width: $(this).closest('editor')
         });
 
-        if($(this).data('word-wrap') == 'yes') {
+        if ($(this).data('word-wrap') == 'yes') {
             editor.data('ace').editor.ace.getSession().setUseWrapMode(true);
         }
 

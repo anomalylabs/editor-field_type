@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'mode'   => [
+    'mode'      => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
@@ -128,7 +128,7 @@ return [
             ]
         ]
     ],
-    'theme'  => [
+    'theme'     => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
@@ -168,7 +168,7 @@ return [
             ]
         ]
     ],
-    'height' => [
+    'height'    => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -181,9 +181,9 @@ return [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
-            'options' => [
+            'options'       => [
                 'yes' => 'Yes',
-                'no' => 'No'
+                'no'  => 'No'
             ],
             'default_value' => 'yes',
         ]
