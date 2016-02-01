@@ -182,8 +182,8 @@ return [
         'required' => true,
         'config'   => [
             'options'       => [
-                'yes' => 'Yes',
-                'no'  => 'No'
+                'yes' => 'streams::misc.yes',
+                'no'  => 'streams::misc.no'
             ],
             'default_value' => 'yes',
         ]

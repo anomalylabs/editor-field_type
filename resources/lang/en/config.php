@@ -15,6 +15,6 @@ return [
     ],
     'word_wrap' => [
         'label'        => 'Word Wrap',
-        'instructions' => 'Soft wrap the content of the editor.'
+        'instructions' => 'Specify if the editor should soft wrap long lines.'
     ]
 ];
