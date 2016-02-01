@@ -13,6 +13,10 @@ $(function () {
             width: $(this).closest('editor')
         });
 
+        if ($(this).data('word-wrap') == 'yes') {
+            editor.data('ace').editor.ace.getSession().setUseWrapMode(true);
+        }
+
         // Toggle fullscreen mode.
         wrapper.find('[data-toggle="fullscreen"]').on('click', function (e) {
 
