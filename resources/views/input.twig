@@ -17,8 +17,10 @@
             style="width: 100%; height: {{ field_type.config.height }}px;"
             {{ field_type.disabled ? 'disabled' }}
             {{ field_type.readonly ? 'readonly' }}
-            >{{ field_type.value }}</textarea>
+    >{{ field_type.value }}</textarea>
 
 </div>
 
-<small class="text-muted hidden-md">{{ field_type.storage_path }}</small>
+<small class="text-muted hidden-md">
+    {{ field_type.storage_path ?: trans('anomaly.field_type.editor::message.storage_path_tip') }}
+</small>
