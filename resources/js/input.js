@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize editors.
-    $('.editor-field_type textarea').each(function () {
+    $('textarea[data-provides="anomaly.field_type.editor"]').each(function () {
 
         var lang = $(this).data('mode');
         var theme = $(this).data('theme');
