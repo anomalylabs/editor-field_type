@@ -220,7 +220,9 @@ By default PHP, HTML, Twig, Markdown and Blade modes are supported by the view s
 Returns the `storage::` prefixed path to the file. If the file is supported by the view system the path omit the extension.
 
     // Twig usage
+    {% verbatim %}
     {% include entry.example.path %}
+    {% endverbatim %}
     
     // API usage
     echo $entry->example->path;
@@ -230,7 +232,9 @@ Returns the `storage::` prefixed path to the file. If the file is supported by t
 Returns the non-prefixed path to the file including extension.
 
     // Twig usage
+    {% verbatim %}
     {% include entry.example.storage_path %}
+    {% endverbatim %}
     
     // API usage
     echo $entry->example->storagePath();
@@ -240,7 +244,9 @@ Returns the non-prefixed path to the file including extension.
 Returns the storage file's rendered content. This method should only be used for files supported by the view system.
 
     // Twig usage
+    {% verbatim %}
     {{ entry.example.rendered|raw }}
+    {% endverbatim %}
     
     // API usage
     echo $entry->example->rendered;
@@ -250,7 +256,9 @@ Returns the storage file's rendered content. This method should only be used for
 Returns the content of the storage passed through the parser. Use caution when allowing access to be parser.
 
     // Twig usage
+    {% verbatim %}
     {{ entry.example.parsed|raw }}
+    {% endverbatim %}
     
     // API usage
     $entry->example->parsed;
@@ -260,7 +268,9 @@ Returns the content of the storage passed through the parser. Use caution when a
 Returns the content of the storage file.
 
     // Twig usage
+    {% verbatim %}
     {{ entry.example.content }}
+    {% endverbatim %}
     
     // API usage
     $entry->example->content;
