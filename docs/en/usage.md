@@ -9,7 +9,7 @@
 <a name="mutator"></a>
 ## Setting Values
 
-You can set the editor field type value with string.
+You can set the editor field type value with a string.
 
 {{ code('php', '$entry->example = $html;') }}
 
