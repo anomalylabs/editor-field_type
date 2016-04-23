@@ -60,7 +60,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function path()
     {
-        if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
+        if (in_array($this->object->extension(), ['html', 'twig'])) {
             return $this->object->getViewPath();
         } else {
             return $this->object->getAssetPath();
@@ -75,7 +75,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
-        return $this->rendered($payload);
+        return $this->view->make($this->path(), $payload)->render();
     }
 
     /**
@@ -83,10 +83,11 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      *
      * @param array $payload
      * @return string
+     * @deprecated deprecated since version 2.0
      */
     public function rendered(array $payload = [])
     {
-        return $this->view->make($this->path(), $payload)->render();
+        return $this->render($payload);
     }
 
     /**
@@ -97,7 +98,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function parse(array $payload = [])
     {
-        return $this->parsed($payload);
+        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
     }
 
     /**
@@ -105,10 +106,11 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      *
      * @param array $payload
      * @return string
+     * @deprecated deprecated since version 2.0
      */
     public function parsed(array $payload = [])
     {
-        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
+        return $this->parsed($payload);
     }
 
     /**
@@ -132,7 +134,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
             return '';
         }
 
-        if (in_array($this->object->getFileExtension(), ['html', 'twig'])) {
+        if (in_array($this->object->extension(), ['html', 'twig'])) {
             return $this->render();
         } else {
             return $this->content();

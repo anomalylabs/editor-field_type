@@ -41,17 +41,6 @@ class EditorFieldType extends FieldType
     ];
 
     /**
-     * The mode to extension definitions.
-     *
-     * @var array
-     */
-    protected $extensions = [
-        'javascript' => 'js',
-        'markdown'   => 'md',
-        'sass'       => 'scss'
-    ];
-
-    /**
      * The application utility.
      *
      * @var Application
@@ -136,18 +125,38 @@ class EditorFieldType extends FieldType
      */
     protected function getFileName()
     {
-        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.' . $this->getFileExtension();
+        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.' . $this->extension();
     }
 
     /**
-     * Get the file extension for the config mode.
+     * Return the file extension.
      *
      * @return mixed
      */
-    public function getFileExtension()
+    public function extension()
+    {
+        return $this->mode()['extension'];
+    }
+
+    /**
+     * Return the editor mode.
+     *
+     * @return mixed
+     */
+    public function mode()
     {
         $mode = array_get($this->getConfig(), 'mode');
 
-        return array_get($this->extensions, $mode, $mode);
+        return config('anomaly.field_type.editor::editor.modes.' . $mode);
+    }
+
+    /**
+     * Return the editor theme.
+     *
+     * @return mixed
+     */
+    public function theme()
+    {
+        return config('anomaly.field_type.editor::editor.theme');
     }
 }
