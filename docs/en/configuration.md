@@ -8,18 +8,18 @@
 
 Below is the full configuration available with defaults.
 
-    {% code php %}
-    protected $fields = [
-        "example" => [
-            "type"   => "anomaly.field_type.country",
-            "config" => [
-                "default_value" => null,
-                "mode"          => "twig",
-                "height"        => 500
-            ]
+{% code php %}
+protected $fields = [
+    "example" => [
+        "type"   => "anomaly.field_type.country",
+        "config" => [
+            "default_value" => null,
+            "mode"          => "twig",
+            "height"        => 500
         ]
-    ];
-    {% endcode %}
+    ]
+];
+{% endcode %}
 
 <hr>
 
