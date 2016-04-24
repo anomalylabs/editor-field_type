@@ -41,7 +41,7 @@ You can override these options by overloading the configuration file with a conf
 
 ### Default Value
 
-    {{ code('php', '"default_type" => "<h1>Hello World</h1>"') }}
+    {{ code('php', '"default_value" => "<h1>Hello World</h1>"') }}
 
 The `default_value` is a core option. This field type accepts any string value.
 
