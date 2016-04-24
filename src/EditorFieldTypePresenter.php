@@ -110,7 +110,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function parsed(array $payload = [])
     {
-        return $this->parsed($payload);
+        return $this->parse($payload);
     }
 
     /**
