@@ -8,18 +8,16 @@
 
 Below is the full configuration available with defaults.
 
-{% code php %}
-protected $fields = [
-    "example" => [
-        "type"   => "anomaly.field_type.country",
-        "config" => [
-            "default_value" => null,
-            "mode"          => "twig",
-            "height"        => 500
+    protected $fields = [
+        "example" => [
+            "type"   => "anomaly.field_type.country",
+            "config" => [
+                "default_value" => null,
+                "mode"          => "twig",
+                "height"        => 500
+            ]
         ]
-    ]
-];
-{% endcode %}
+    ];
 
 <hr>
 
@@ -41,13 +39,13 @@ You can override these options by overloading the configuration file with a conf
 
 ### Default Value
 
-    {{ code('php', '"default_value" => "<h1>Hello World</h1>"') }}
+    "default_value" => "<h1>Hello World</h1>"
 
 The `default_value` is a core option. This field type accepts any string value.
 
 ### Input Mode
 
-{{ code('php', '"mode" => "twig"') }}
+    "mode" => "twig"
 
 Specify the input mode to display. The modes are determined by the `editor.php` config file. The mode dictates the syntax highlighting and behavior of the input.
 
@@ -62,7 +60,7 @@ Specify the input mode to display. The modes are determined by the `editor.php` 
 
 ### Editor Height
 
-{{ code('php', '"height" => 1000') }}
+    "height" => 1000
 
 Specify the height of the editor.
 
