@@ -21,6 +21,8 @@
 
 </div>
 
+{% if field_type.storage_path %}
 <small class="text-muted hidden-md">
-    {{ field_type.storage_path ?: trans('anomaly.field_type.editor::message.storage_path_tip') }}
+    {{ field_type.storage_path }}
 </small>
+{% endif %}
