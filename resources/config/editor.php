@@ -26,6 +26,14 @@ return [
         'css'        => [
             'extension' => 'css',
             'name'      => 'CSS'
+        ],
+        'json'        => [
+            'extension' => 'json',
+            'name'      => 'JSON'
+        ],
+        'yaml'        => [
+            'extension' => 'yaml',
+            'name'      => 'YAML'
         ]
     ]
 ];
