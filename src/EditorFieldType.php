@@ -12,7 +12,6 @@ use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\EditorFieldType
  */
 class EditorFieldType extends FieldType
 {
@@ -39,7 +38,7 @@ class EditorFieldType extends FieldType
     protected $config = [
         'theme'  => 'monokai',
         'mode'   => 'twig',
-        'height' => 500
+        'height' => 500,
     ];
 
     /**

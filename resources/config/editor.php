@@ -5,35 +5,35 @@ return [
     'modes' => [
         'javascript' => [
             'extension' => 'js',
-            'name'      => 'JavaScript'
+            'name'      => 'JavaScript',
         ],
         'markdown'   => [
             'extension' => 'md',
-            'name'      => 'Markdown'
+            'name'      => 'Markdown',
         ],
         'twig'       => [
             'extension' => 'twig',
-            'name'      => 'Twig'
+            'name'      => 'Twig',
         ],
         'html'       => [
             'extension' => 'html',
-            'name'      => 'HTML'
+            'name'      => 'HTML',
         ],
         'scss'       => [
             'extension' => 'scss',
-            'name'      => 'SCSS'
+            'name'      => 'SCSS',
         ],
         'css'        => [
             'extension' => 'css',
-            'name'      => 'CSS'
+            'name'      => 'CSS',
         ],
         'json'        => [
             'extension' => 'json',
-            'name'      => 'JSON'
+            'name'      => 'JSON',
         ],
         'yaml'        => [
             'extension' => 'yaml',
-            'name'      => 'YAML'
-        ]
-    ]
+            'name'      => 'YAML',
+        ],
+    ],
 ];

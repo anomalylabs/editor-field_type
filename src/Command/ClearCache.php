@@ -1,6 +1,6 @@
 <?php namespace Anomaly\EditorFieldType\Command;
 
-use Illuminate\Contracts\Bus\SelfHandling;
+
 use Illuminate\Filesystem\Filesystem;
 use TwigBridge\Bridge;
 
@@ -10,9 +10,8 @@ use TwigBridge\Bridge;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\EditorFieldType\Command
  */
-class ClearCache implements SelfHandling
+class ClearCache
 {
 
     /**

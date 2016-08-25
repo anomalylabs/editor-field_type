@@ -11,7 +11,6 @@ use Illuminate\View\Factory;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\EditorFieldType
  */
 class EditorFieldTypePresenter extends FieldTypePresenter
 {
@@ -70,7 +69,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      */
     public function render(array $payload = [])
@@ -81,7 +80,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      * @deprecated deprecated since version 2.0
      */
@@ -93,7 +92,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the parsed content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      */
     public function parse(array $payload = [])
@@ -104,7 +103,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the parsed content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      * @deprecated deprecated since version 2.0
      */

@@ -9,7 +9,6 @@ use Illuminate\Filesystem\Filesystem;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\EditorFieldType
  */
 class EditorFieldTypeServiceProvider extends AddonServiceProvider
 {
@@ -23,7 +22,7 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
             'editor-field_type'
         );
 
-        /**
+        /*
          * If the Ace assets don't exist then
          * copy them all over there.
          */

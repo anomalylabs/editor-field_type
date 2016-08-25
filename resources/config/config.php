@@ -17,8 +17,8 @@ return [
                         $config->get('anomaly.field_type.editor::editor.modes')
                     )
                 );
-            }
-        ]
+            },
+        ],
     ],
     'height'    => [
         'type'     => 'anomaly.field_type.integer',
@@ -26,8 +26,8 @@ return [
         'config'   => [
             'default_value' => 500,
             'min'           => 200,
-            'step'          => 50
-        ]
+            'step'          => 50,
+        ],
     ],
     'word_wrap' => [
         'type'     => 'anomaly.field_type.select',
@@ -35,10 +35,10 @@ return [
         'config'   => [
             'options'       => [
                 'yes' => 'streams::misc.yes',
-                'no'  => 'streams::misc.no'
+                'no'  => 'streams::misc.no',
             ],
             'default_value' => 'yes',
-        ]
+        ],
     ],
 
 ];
