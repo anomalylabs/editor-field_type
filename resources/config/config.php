@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Config\Repository;
 
 return [
-    'mode'      => [
+    'mode'          => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
@@ -20,7 +20,10 @@ return [
             },
         ],
     ],
-    'height'    => [
+    'default_value' => [
+        'type' => 'anomaly.field_type.textarea',
+    ],
+    'height'        => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -29,7 +32,7 @@ return [
             'step'          => 50,
         ],
     ],
-    'word_wrap' => [
+    'word_wrap'     => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
