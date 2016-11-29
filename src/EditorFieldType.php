@@ -1,10 +1,8 @@
 <?php namespace Anomaly\EditorFieldType;
 
-use Anomaly\EditorFieldType\Command\RenameDirectory;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
-use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
+use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
  * Class EditorFieldType
@@ -42,6 +40,13 @@ class EditorFieldType extends FieldType
     ];
 
     /**
+     * The storage handler.
+     *
+     * @var null|EditorFieldTypeStorage
+     */
+    protected $storage = null;
+
+    /**
      * The application utility.
      *
      * @var Application
@@ -65,20 +70,7 @@ class EditorFieldType extends FieldType
      */
     public function getFilePath()
     {
-        if ($this->entry === null || !is_object($this->entry) || !$this->entry->getId()) {
-            return null;
-        }
-
-        if (!$this->entry instanceof EntryInterface && !$this->entry instanceof EntryTranslationsModel) {
-            return null;
-        }
-
-        $slug      = $this->entry->getStreamSlug();
-        $namespace = $this->entry->getStreamNamespace();
-        $directory = $this->entry->getEntryId();
-        $file      = $this->getFileName();
-
-        return "{$namespace}/{$slug}/{$directory}/{$file}";
+        return $this->storage()->path();
     }
 
     /**
@@ -88,11 +80,7 @@ class EditorFieldType extends FieldType
      */
     public function getStoragePath()
     {
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return $this->application->getStoragePath($path);
+        return $this->storage()->storagePath();
     }
 
     /**
@@ -102,11 +90,7 @@ class EditorFieldType extends FieldType
      */
     public function getViewPath()
     {
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return 'storage::' . str_replace(['.html', '.twig'], '', $path);
+        return $this->storage()->viewPath();
     }
 
     /**
@@ -116,11 +100,7 @@ class EditorFieldType extends FieldType
      */
     public function getAssetPath()
     {
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return 'storage::' . $path;
+        return $this->storage()->assetPath();
     }
 
     /**
@@ -130,7 +110,7 @@ class EditorFieldType extends FieldType
      */
     protected function getFileName()
     {
-        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.' . $this->extension();
+        return $this->storage()->filename();
     }
 
     /**
@@ -163,5 +143,20 @@ class EditorFieldType extends FieldType
     public function theme()
     {
         return config('anomaly.field_type.editor::editor.theme');
+    }
+
+    /**
+     * Return the storage class.
+     */
+    public function storage()
+    {
+        if (!$this->storage) {
+            $this->storage = app()->make(
+                $this->config('storage', EditorFieldTypeStorage::class),
+                ['fieldType' => $this]
+            );
+        }
+
+        return $this->storage;
     }
 }

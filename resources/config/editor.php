@@ -3,14 +3,6 @@
 return [
     'theme' => 'monokai',
     'modes' => [
-        'javascript' => [
-            'extension' => 'js',
-            'name'      => 'JavaScript',
-        ],
-        'markdown'   => [
-            'extension' => 'md',
-            'name'      => 'Markdown',
-        ],
         'twig'       => [
             'extension' => 'twig',
             'name'      => 'Twig',
@@ -19,19 +11,31 @@ return [
             'extension' => 'html',
             'name'      => 'HTML',
         ],
-        'scss'       => [
-            'extension' => 'scss',
-            'name'      => 'SCSS',
-        ],
         'css'        => [
             'extension' => 'css',
             'name'      => 'CSS',
         ],
-        'json'        => [
+        'javascript' => [
+            'extension' => 'js',
+            'name'      => 'JavaScript',
+        ],
+        'markdown'   => [
+            'extension' => 'md',
+            'name'      => 'Markdown',
+        ],
+        'scss'       => [
+            'extension' => 'scss',
+            'name'      => 'SCSS',
+        ],
+        'less'       => [
+            'extension' => 'less',
+            'name'      => 'LESS',
+        ],
+        'json'       => [
             'extension' => 'json',
             'name'      => 'JSON',
         ],
-        'yaml'        => [
+        'yaml'       => [
             'extension' => 'yaml',
             'name'      => 'YAML',
         ],
