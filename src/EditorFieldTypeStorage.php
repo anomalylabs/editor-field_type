@@ -140,7 +140,12 @@ class EditorFieldTypeStorage
      */
     public function filename()
     {
-        if (!$this->fieldType->getEntry()->getId()) {
+        $entry = $this->fieldType->getEntry();
+
+        /**
+         * We must have an entry with ID like upper in `directories()`
+         */
+        if ($entry === null || !is_object($entry) || !$entry->getId()) {
             return null;
         }
 
