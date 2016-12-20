@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('ajaxComplete ready', function () {
 
     // Initialize editors.
     $('textarea[data-provides="anomaly.field_type.editor"]').each(function () {
