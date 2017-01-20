@@ -3,6 +3,7 @@
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
+use Illuminate\Filesystem\Filesystem;
 
 /**
  * Class EditorFieldTypeStorage
@@ -29,13 +30,22 @@ class EditorFieldTypeStorage
     protected $application;
 
     /**
+     * The filesystem.
+     *
+     * @var Filesystem
+     */
+    protected $files;
+
+    /**
      * Create a new EditorFieldTypeStorage instance.
      *
      * @param EditorFieldType $fieldType
      * @param Application     $application
+     * @param Filesystem      $files
      */
-    public function __construct(EditorFieldType $fieldType, Application $application)
+    public function __construct(EditorFieldType $fieldType, Application $application, Filesystem $files)
     {
+        $this->files       = $files;
         $this->fieldType   = $fieldType;
         $this->application = $application;
     }
@@ -150,8 +160,20 @@ class EditorFieldTypeStorage
         }
 
         return trim(
-            $this->fieldType->getField() . '_' . $this->fieldType->getLocale(),
-            '_'
-        ) . '.' . $this->fieldType->extension();
+                $this->fieldType->getField() . '_' . $this->fieldType->getLocale(),
+                '_'
+            ) . '.' . $this->fieldType->extension();
+    }
+
+    /**
+     * Cleanup the storage file.
+     */
+    public function cleanup()
+    {
+        $path = $this->fieldType->getStoragePath();
+
+        if ($path && $this->files->exists($path)) {
+            $this->files->delete($path);
+        }
     }
 }

@@ -1,7 +1,5 @@
 <?php namespace Anomaly\EditorFieldType;
 
-use Anomaly\EditorFieldType\Command\DeleteDirectory;
-use Anomaly\EditorFieldType\Command\PutFile;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 

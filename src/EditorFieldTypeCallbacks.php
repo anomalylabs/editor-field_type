@@ -1,6 +1,5 @@
 <?php namespace Anomaly\EditorFieldType;
 
-use Anomaly\EditorFieldType\Command\DeleteDirectory;
 use Anomaly\EditorFieldType\Command\PutFile;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -46,7 +45,7 @@ class EditorFieldTypeCallbacks
     public function onEntryDeleted(EditorFieldType $fieldType)
     {
         if (!$fieldType->getLocale()) {
-            $this->dispatch(new DeleteDirectory($fieldType));
+            $fieldType->storage()->cleanup();
         }
     }
 
@@ -57,6 +56,6 @@ class EditorFieldTypeCallbacks
      */
     public function onEntryTranslationDeleted(EditorFieldType $fieldType)
     {
-        $this->dispatch(new DeleteDirectory($fieldType));
+        $fieldType->storage()->cleanup();
     }
 }
