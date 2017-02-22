@@ -39,5 +39,9 @@ return [
             'extension' => 'yaml',
             'name'      => 'YAML',
         ],
+        'php'       => [
+            'extension' => 'php',
+            'name'      => 'PHP',
+        ],
     ],
 ];
