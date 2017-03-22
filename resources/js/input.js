@@ -41,5 +41,44 @@ $(document).on('ajaxComplete ready', function () {
                 window.dispatchEvent(new Event('resize'));
             }
         });
+        
+        var $dragArea = $('.ace_content');
+
+        $dragArea.on('dragover', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            e.originalEvent.dataTransfer.dropEffect = 'copy';
+        });
+
+        $dragArea.on('dragenter', function (e) {
+            $(e.target).css({ backgroundColor: 'rgba(103, 58, 183, 0.5)' });
+        });
+
+        $dragArea.on('dragleave', function (e) {
+            $(e.target).css({ backgroundColor: 'transparent' });
+        });
+
+        $dragArea.on('drop', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            var files = e.originalEvent.dataTransfer.files;
+            var output = [];
+            var $list = $('<div/>').attr('id', 'list').appendTo($(this).closest('.editor'));
+
+            for (var i = 0, f; f = files[i]; i++) {
+                output.push(
+                    '<li><strong>', escape(f.name),
+                    '</strong> (', f.type || 'n/a', ') - ', f.size,
+                    ' bytes, last modified: ',
+                    f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                    '</li>'
+                );
+            }
+
+            document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+
+            $(e.target).css({ backgroundColor: 'transparent' });
+        });
     });
 });
