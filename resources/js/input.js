@@ -90,10 +90,14 @@ $(document).on('ajaxComplete ready', function () {
             previewsContainer: '.droppedFilesContainer',
             clickable: false,
             createImageThumbnails: true,
+            // thumbnailWidth: 400,
+            // thumbnailHeight: 200,
+            previewTemplate: document.getElementById('preview-template').innerHTML,
 
             init: function () {
 
                 var self = this;
+                var filters = [];
 
                 /**
                  * Force deleting query
@@ -124,6 +128,13 @@ $(document).on('ajaxComplete ready', function () {
                 // After success send
                 this.on('success', function (file, response) {
                     var id = response.id;
+                    var additionClass = response.mime_type && response.mime_type.replace('/', '-') || 'default';
+
+                    if (!filters.includes(additionClass)) {
+                        filters.push(additionClass);
+                    }
+
+                    file.previewElement.classList.add(additionClass);
 
                     // Red button event listener
                     $(file.previewElement).on('click', '.dz-error-mark', function () {
@@ -133,6 +144,87 @@ $(document).on('ajaxComplete ready', function () {
                     // Green button event listener
                     $(file.previewElement).on('click', '.dz-success-mark', function () {
                         pasteToEditor(file);
+                    });
+                });
+
+                this.on('queuecomplete', function () {
+                    var $filters = $('.droppedFilesFilters');
+                    var $grid = $('.droppedFilesContainer').isotope({
+                        itemSelector: '.dz-preview',
+                        layoutMode: 'fitRows',
+                    });
+                    var docElemStyle = document.documentElement.style;
+                    var transitionProp = typeof docElemStyle.transition == 'string' ?
+                        'transition' :
+                        'WebkitTransition';
+                    var transitionEndEvent = {
+                        WebkitTransition: 'webkitTransitionEnd',
+                        transition: 'transitionend',
+                    }[transitionProp];
+
+                    var setItemContentPixelSize = function (itemContent) {
+                        var previousContentSize = getSize( itemContent );
+                        itemContent.style[transitionProp] = 'none';
+                        itemContent.style.width = previousContentSize.width + 'px';
+                        itemContent.style.height = previousContentSize.height + 'px';
+                    };
+
+                    var addTransitionListener = function (itemContent) {
+                        if (!transitionProp) {
+                            return;
+                        }
+                        var onTransitionEnd = function () {
+                            itemContent.style.width = '';
+                            itemContent.style.height = '';
+                            itemContent.removeEventListener( transitionEndEvent, onTransitionEnd );
+                        };
+                        itemContent.addEventListener( transitionEndEvent, onTransitionEnd );
+                    };
+
+                    var setItemContentTransitionSize = function (itemContent, itemElem) {
+                        var size = getSize(itemElem);
+                        itemContent.style.width = size.width + 'px';
+                        itemContent.style.height = size.height + 'px';
+                    };
+
+                    filters.push('all');
+
+                    filters.forEach(function (filter) {
+                        var $button = $('<button/>', { id: 'f-' + filter }).html(filter);
+                        var $wrapper = $('<span/>', { 'class': filter }).append($button);
+
+                        $button.on('click', function (e) {
+                            e.preventDefault();
+
+                            var name = this.id.replace('f-', '');
+
+                            $grid.isotope({
+                                filter: function () {
+                                    if (name === 'all') {
+                                        return true;
+                                    }
+                                    return this.classList.contains(name);
+                                },
+                            })
+                        });
+
+                        $filters.append($wrapper);
+                    });
+
+                    $grid.on('click', '.inner', function () {
+                        var itemContent = this;
+                        setItemContentPixelSize(itemContent);
+
+                        var itemElem = itemContent.parentNode;
+                        $(itemElem).toggleClass('is-expanded');
+
+                        var redraw = itemContent.offsetWidth;
+                        itemContent.style[transitionProp] = '';
+
+                        addTransitionListener(itemContent);
+                        setItemContentTransitionSize(itemContent, itemElem);
+
+                        $grid.isotope('layout');
                     });
                 });
             },
@@ -150,7 +242,7 @@ $(document).on('ajaxComplete ready', function () {
                 } else {
                     done();
                 }
-            }
+            },
         });
 
     });
