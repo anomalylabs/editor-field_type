@@ -41,44 +41,117 @@ $(document).on('ajaxComplete ready', function () {
                 window.dispatchEvent(new Event('resize'));
             }
         });
-        
-        var $dragArea = $('.ace_content');
 
-        $dragArea.on('dragover', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            e.originalEvent.dataTransfer.dropEffect = 'copy';
-        });
+        /**
+         * Deleting and force deleting of a file
+         *
+         * @param      {Number}    id        The identifier
+         * @param      {Boolean}   force     The force
+         * @param      {Function}  callback  The callback
+         */
+        var deleteFile = function(id, force, callback) {
+            var xhr = new XMLHttpRequest();
+            var formData = new FormData();
+            var url = force ? '/admin/files?view=trash' : '/admin/files';
+            var action = force ? 'force_delete' : 'delete';
 
-        $dragArea.on('dragenter', function (e) {
-            $(e.target).css({ backgroundColor: 'rgba(103, 58, 183, 0.5)' });
-        });
+            formData.append('action', action);
+            formData.append('id[]', id);
 
-        $dragArea.on('dragleave', function (e) {
-            $(e.target).css({ backgroundColor: 'transparent' });
-        });
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('X-CSRF-Token', CSRF_TOKEN);
+            xhr.onreadystatechange = callback;
 
-        $dragArea.on('drop', function (e) {
-            e.stopPropagation();
-            e.preventDefault();
+            xhr.send(formData);
+        };
 
-            var files = e.originalEvent.dataTransfer.files;
-            var output = [];
-            var $list = $('<div/>').attr('id', 'list').appendTo($(this).closest('.editor'));
+        /**
+         * Gets the image html tag.
+         *
+         * @param      {string}  src     The source
+         * @return     {string}  The image html tag.
+         */
+        var getImgHtmlTag = function (src) {
+            return '<img src="{{ image(\'' + src + '\') }}" />';
+        };
 
-            for (var i = 0, f; f = files[i]; i++) {
-                output.push(
-                    '<li><strong>', escape(f.name),
-                    '</strong> (', f.type || 'n/a', ') - ', f.size,
-                    ' bytes, last modified: ',
-                    f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                    '</li>'
-                );
+        /**
+         * Paste tag to the editor
+         *
+         * @param      {Object}  file    The file
+         */
+        var pasteToEditor = function (file) {
+            editor.data('ace').editor.ace.insert(getImgHtmlTag(file.name));
+        };
+
+        $('.ace_content').dropzone({
+            url: '/admin/files/upload/handle',
+            paramName: 'upload',
+            previewsContainer: '.droppedFilesContainer',
+            clickable: false,
+            createImageThumbnails: true,
+
+            init: function () {
+
+                var self = this;
+
+                /**
+                 * Force deleting query
+                 *
+                 * @param      {Number}  id      The identifier
+                 * @param      {Object}  file    The file
+                 */
+                var forceDelete = function (id, file) {
+                    deleteFile(id, false, function () {
+                        if (this.readyState != 4 || this.status != 200) {
+                            return;
+                        }
+                        deleteFile(id, true, function () {
+                            if (this.readyState != 4 || this.status != 200) {
+                                return;
+                            }
+                            self.removeFile(file);
+                        })
+                    })
+                };
+
+                // Before send
+                this.on('sending', function (file, xhr, formData) {
+                    xhr.setRequestHeader('X-CSRF-Token', CSRF_TOKEN);
+                    formData.append('folder', '1');
+                });
+
+                // After success send
+                this.on('success', function (file, response) {
+                    var id = response.id;
+
+                    // Red button event listener
+                    $(file.previewElement).on('click', '.dz-error-mark', function () {
+                        forceDelete(id, file);
+                    });
+
+                    // Green button event listener
+                    $(file.previewElement).on('click', '.dz-success-mark', function () {
+                        pasteToEditor(file);
+                    });
+                });
+            },
+
+            /**
+             * Validation of file
+             *
+             * @param      {Object}    file    The file
+             * @param      {Function}  done    The done
+             * @TODO Need to remove Bieber!
+             */
+            accept: function (file, done) {
+                if (file.name == "justinbieber.jpg") {
+                    done("Naha, you don't.");
+                } else {
+                    done();
+                }
             }
-
-            document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-
-            $(e.target).css({ backgroundColor: 'transparent' });
         });
+
     });
 });
