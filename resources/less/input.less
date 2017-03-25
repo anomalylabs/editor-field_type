@@ -72,23 +72,52 @@
 
 .droppedFilesContainer {
     background: #607D8B;
-    text-align: center;
-    padding: 40px;
 
     .dz-preview {
-        display: inline-block;
         position: relative;
-        width: 150px;
-        text-align: center;
-        margin: 15px;
+        width: 20%;
+        height: 255px;
+
+        .inner {
+            width:  100%;
+            height: 255px;
+            background: #09D;
+            transition: width 0.4s, height 0.4s;
+        }
+
+        &.is-expanded {
+            width: 100%;
+            height: 765px;
+        }
+
+        .dz-details {
+
+            .dz-filename {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+            }
+
+            .dz-size {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+            }
+
+            img {
+                width: 100%;
+                // height: 100%;
+            }
+        }
+
 
         .dz-progress {
-            height: 120px;
-            width: 120px;
-            background-color: rgba(255, 245, 157, 0.3);
             position: absolute;
-            top: 0px;
-            left: 15px;
+            background-color: rgba(255, 245, 157, 0.3);
+            height: 20px;
+            width: 100%;
+            left: 0px;
+            bottom: 0px;
 
             span.dz-upload {
                 height: 100%;
@@ -98,61 +127,9 @@
         }
 
         .dz-success-mark, .dz-error-mark {
-            display: inline-block;
             position: absolute;
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
             cursor: pointer;
-            top: 50%;
-            left: 50%;
-            margin-top: -50px;
-            margin-left: -25px;
             transition: opacity .5s linear, transform .3s ease-out;
-
-            svg path {
-                fill: #eceff1;
-            }
         }
-
-        .dz-error-mark {
-            background: #d32f2f;
-        }
-
-        .dz-success-mark {
-            background: #388e3c;
-        }
-
-        &.dz-success > .dz-success-mark {
-            z-index: 3;
-        }
-
-        &.dz-error > .dz-success-mark {
-            opacity: 0;
-            z-index: 0;
-        }
-
-        &:hover {
-
-            &.dz-success {
-
-                > .dz-progress {
-                    background-color: transparent;
-
-                    > .dz-upload {
-                        background-color: transparent;
-                    }
-                }
-            }
-
-            > .dz-error-mark {
-                transform: translateY(30px);
-            }
-
-            > .dz-success-mark {
-                transform: translateY(-30px);
-            }
-        }
-
     }
 }
