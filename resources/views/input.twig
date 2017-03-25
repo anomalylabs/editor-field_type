@@ -1,7 +1,10 @@
 {{ asset_add("scripts.js", "asset::editor-field_type/ace.js") }}
 {{ asset_add("scripts.js", "asset::editor-field_type/mode-" ~ field_type.config.mode ~ ".js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.editor::js/jquery-ace.min.js") }}
+{{ asset_add("scripts.js", "anomaly.field_type.editor::js/dropzone.min.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.editor::js/input.js") }}
+{{ asset_add("styles.css", "anomaly.field_type.editor::css/dropzone.min.css") }}
+{{ asset_add("styles.css", "anomaly.field_type.editor::css/basic.min.css") }}
 {{ asset_add("styles.css", "anomaly.field_type.editor::less/input.less") }}
 
 <div class="editor">
@@ -20,6 +23,8 @@
             {{ field_type.readonly ? 'readonly' }}>{{ field_type.value }}</textarea>
 
 </div>
+
+<div class="droppedFilesContainer"></div>
 
 {% if config('app.debug') and field_type.storage_path %}
     <small class="text-muted hidden-md">
