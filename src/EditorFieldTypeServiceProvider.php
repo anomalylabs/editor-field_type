@@ -7,12 +7,18 @@ use Illuminate\Filesystem\Filesystem;
 /**
  * Class EditorFieldTypeServiceProvider
  *
- * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
+ *
+ * @link          http://pyrocms.com/
  */
 class EditorFieldTypeServiceProvider extends AddonServiceProvider
 {
+
+    protected $routes = [
+        'admin/editor-field_type/folder/choose' => 'Anomaly\EditorFieldType\Http\Controller\Admin\FilesController@choose',
+        'admin/editor-field_type/file/upload'   => 'Anomaly\EditorFieldType\Http\Controller\Admin\FilesController@upload',
+    ];
 
     /**
      * Register the service provider.
@@ -22,16 +28,17 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
     public function register(EditorFieldType $fieldType)
     {
 
-        $fieldType->on('entry_saved', EditorFieldTypeCallbacks::class . '@onEntrySaved');
-        $fieldType->on('entry_deleted', EditorFieldTypeCallbacks::class . '@onEntryDeleted');
-        $fieldType->on('entry_translation_saved', EditorFieldTypeCallbacks::class . '@onEntryTranslationSaved');
-        $fieldType->on('entry_translation_deleted', EditorFieldTypeCallbacks::class . '@onEntryTranslationDeleted');
+        $fieldType->on('entry_saved', EditorFieldTypeCallbacks::class.'@onEntrySaved');
+        $fieldType->on('entry_deleted', EditorFieldTypeCallbacks::class.'@onEntryDeleted');
+        $fieldType->on('entry_translation_saved', EditorFieldTypeCallbacks::class.'@onEntryTranslationSaved');
+        $fieldType->on('entry_translation_deleted', EditorFieldTypeCallbacks::class.'@onEntryTranslationDeleted');
 
         /*
          * If the Ace assets don't exist then
          * copy them all over there.
          */
-        if (!is_dir($target = $this->app->make(Application::class)->getAssetsPath('editor-field_type'))) {
+        if (!is_dir($target = $this->app->make(Application::class)->getAssetsPath('editor-field_type')))
+        {
 
             /* @var Filesystem $files */
             $files = $this->app->make('files');

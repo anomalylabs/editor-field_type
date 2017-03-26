@@ -1,47 +1,66 @@
 <?php
 
 return [
-    'theme' => 'monokai',
-    'modes' => [
-        'twig'       => [
-            'extension' => 'twig',
-            'name'      => 'Twig',
-        ],
-        'html'       => [
-            'extension' => 'html',
-            'name'      => 'HTML',
-        ],
+    'themes' => array_map(
+        function ($item)
+        {
+            return str_replace(
+                '.css',
+                '',
+                array_get(array_reverse(explode('/', $item)), 0)
+            );
+        },
+        glob(__DIR__.'/../js/theme/*'
+    )),
+
+    'modes'  => [
         'css'        => [
             'extension' => 'css',
             'name'      => 'CSS',
         ],
         'javascript' => [
-            'extension' => 'js',
+            'extension' => 'javascript',
             'name'      => 'JavaScript',
         ],
         'markdown'   => [
-            'extension' => 'md',
+            'extension' => 'markdown',
             'name'      => 'Markdown',
         ],
-        'scss'       => [
-            'extension' => 'scss',
-            'name'      => 'SCSS',
+        'php'        => [
+            'extension' => 'php',
+            'name'      => 'PHP',
         ],
-        'less'       => [
-            'extension' => 'less',
-            'name'      => 'LESS',
+        'pug'        => [
+            'extension' => 'pug',
+            'name'      => 'Pug',
         ],
-        'json'       => [
-            'extension' => 'json',
-            'name'      => 'JSON',
+        'sass'       => [
+            'extension' => 'sass',
+            'name'      => 'SASS',
+        ],
+        'shell'      => [
+            'extension' => 'shell',
+            'name'      => 'Shell',
+        ],
+        'stylus'     => [
+            'extension' => 'stylus',
+            'name'      => 'Stylus',
+        ],
+        'twig'       => [
+            'extension' => 'twig',
+            'name'      => 'Twig',
+        ],
+        'vue'        => [
+            'extension' => 'vue',
+            'name'      => 'Vue',
+        ],
+        'xml'        => [
+            'extension' => 'xml',
+            'name'      => 'XML',
         ],
         'yaml'       => [
             'extension' => 'yaml',
             'name'      => 'YAML',
-        ],
-        'php'       => [
-            'extension' => 'php',
-            'name'      => 'PHP',
         ],
     ],
 ];
