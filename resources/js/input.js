@@ -1,4 +1,7 @@
-+(function (window, document) {
+/*global emmetCodeMirror CodeMirror*/
+/*eslint semi: 0*/
+
++(function (window, document, emmetCodeMirror, CodeMirror) {
   document.addEventListener('DOMContentLoaded', function () {
     var textareas = document.querySelectorAll(
       'textarea[data-provides="anomaly.field_type.editor"]'
@@ -11,6 +14,7 @@
 
       var fullscreen = wrapper.querySelector('.fullscreen');
       var modeToggle = wrapper.querySelector('.code-mode-changer');
+      var themeToggle = wrapper.querySelector('.code-theme-changer');
 
       var editor = CodeMirror.fromTextArea(textarea, {
         lineNumbers: true,
@@ -42,17 +46,25 @@
 
       emmetCodeMirror(editor);
 
-      document.querySelector('.CodeMirror').style.height = height;
-      document.querySelector('.CodeMirror-scroll').style.fontSize = data.font_size + 'px';
+      var cm = document.querySelector('.CodeMirror');
+      var cmScroll = document.querySelector('.CodeMirror-scroll');
+
+      cm.style.height = height;
+      cmScroll.style.fontSize = data.font_size + 'px';
 
       fullscreen.onclick = function (e) {
         e.preventDefault();
+        e.target.parentElement.classList.toggle('expanded');
         editor.setOption('fullScreen', !editor.getOption('fullScreen'));
       };
 
       modeToggle.onchange = function (e) {
         editor.setOption('mode', e.target.value);
       };
+
+      themeToggle.onchange = function (e) {
+        editor.setOption('theme', e.target.value);
+      };
     });
   });
-})(window, document);
+})(window, document, emmetCodeMirror, CodeMirror);

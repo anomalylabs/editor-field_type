@@ -345,6 +345,15 @@ span.CodeMirror-selectedtext { background: none; }
 
 a.fullscreen {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 35px;
+  right: 30px;
+  z-index: 3000;
+  color: #9E9E9E;
+  font-size: 1.5em;
 }
+
+a.fullscreen.expanded {
+  position: fixed;
+  top: 10px;
+}
+

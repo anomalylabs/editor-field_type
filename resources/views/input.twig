@@ -1,4 +1,5 @@
 {% set modes = config_get('anomaly.field_type.editor::editor.modes') %}
+{% set themes = config_get('anomaly.field_type.editor::editor.themes') %}
 
 {{ asset_add('styles.css', 'anomaly.field_type.editor::js/lib/codemirror.css') }}
 {{ asset_add('styles.css', 'anomaly.field_type.editor::js/addon/dialog/dialog.css') }}
@@ -7,7 +8,9 @@
 {{ asset_add('styles.css', 'anomaly.field_type.editor::js/addon/lint/lint.css') }}
 {{ asset_add('styles.css', 'anomaly.field_type.editor::js/theme/isotope.css') }}
 
-{{ asset_add('styles.css', 'anomaly.field_type.editor::js/theme/'~field_type.config.theme~'.css' ?: 'tomorrow-night-eighties.css') }}
+{% for theme in themes %}
+    {{ asset_add('styles.css', 'anomaly.field_type.editor::js/theme/'~theme~'.css') }}
+{% endfor %}
 
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/lib/codemirror.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/emmet.js') }}
@@ -59,7 +62,17 @@
                 {% if field_type.config.mode == index %}
                     selected="selected"
                 {% endif %}
-            >{{ index }}</option>
+            >{{ mode.name }}</option>
+        {% endfor %}
+    </select>
+
+    <select class="code-theme-changer">
+        {% for theme in themes %}
+            <option
+                {% if field_type.config.theme == index %}
+                    selected="selected"
+                {% endif %}
+            >{{ theme }}</option>
         {% endfor %}
     </select>
 
