@@ -21,6 +21,7 @@
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/wrap/hardwrap.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/selection/active-line.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/display/fullscreen.js') }}
+{{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/mode/multiplex.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/mode/overlay.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.editor::js/addon/dialog/dialog.js') }}
 
@@ -56,7 +57,7 @@
 
     <a href="#" class="fullscreen">{{ icon('expand') }}</a>
 
-    <select class="code-mode-changer">
+    <select class="code-mode-changer custom-select form-control">
         {% for index,mode in modes %}
             <option value="{{ index }}"
                 {% if field_type.config.mode == index %}
@@ -66,7 +67,7 @@
         {% endfor %}
     </select>
 
-    <select class="code-theme-changer">
+    <select class="code-theme-changer custom-select form-control">
         {% for theme in themes %}
             <option
                 {% if field_type.config.theme == index %}

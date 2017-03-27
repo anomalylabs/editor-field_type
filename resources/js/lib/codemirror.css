@@ -345,8 +345,8 @@ span.CodeMirror-selectedtext { background: none; }
 
 a.fullscreen {
   position: absolute;
-  top: 35px;
-  right: 30px;
+  top: 50px;
+  right: 20px;
   z-index: 3000;
   color: #9E9E9E;
   font-size: 1.5em;
@@ -357,3 +357,6 @@ a.fullscreen.expanded {
   top: 10px;
 }
 
+.codemirror .custom-select {
+  width: 20%;
+}
