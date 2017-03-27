@@ -33,9 +33,8 @@ class EditorFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'theme'  => 'monokai',
-        'mode'   => 'twig',
-        'height' => 500,
+        'theme' => 'monokai',
+        'mode'  => 'twig',
     ];
 
     /**

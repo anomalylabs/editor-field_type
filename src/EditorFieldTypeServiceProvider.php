@@ -36,7 +36,7 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
             /* @var Filesystem $files */
             $files = $this->app->make('files');
 
-            $files->copyDirectory($this->addon->getPath('resources/js/ace'), $target);
+            $files->copyDirectory($this->addon->getPath('resources/js/codemirror'), $target);
         }
     }
 }
