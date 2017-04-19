@@ -79,7 +79,7 @@ class EditorFieldTypeStorage
          */
         $slug      = $entry->getStreamSlug();
         $namespace = $entry->getStreamNamespace();
-        $directory = $entry->getEntryId();
+        $directory = $entry->getAttribute('slug');
 
         return "{$namespace}/{$slug}/{$directory}";
     }
