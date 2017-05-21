@@ -10,6 +10,9 @@
 {# Show Hint Addon #}
 {{ asset_add('styles.css', 'asset::editor-field_type/addon/hint/show-hint.css') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/hint/show-hint.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/hint/css-hint.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/hint/html-hint.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/hint/javascript-hint.js') }}
 
 {# Lint Addon #}
 {{ asset_add('styles.css', 'asset::editor-field_type/addon/lint/lint.css') }}
@@ -22,11 +25,14 @@
 {# Edit Addons #}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/closetag.js') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/closebrackets.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/continuelist.js') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/matchbrackets.js') }}
-{{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/matchbrackets.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/matchtags.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/edit/trailingspace.js') }}
 
 {# Selection Addons #}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/selection/selection-pointer.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/selection/mark-selection.js') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/selection/active-line.js') }}
 
 {# Search Addons #}
@@ -39,14 +45,16 @@
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/comment/comment.js') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/comment/continuecomment.js') }}
 
-{# Miscelaneous Addons #}
-{{ asset_add('scripts.js', 'asset::editor-field_type/addon/scroll/annotatescrollbar.js') }}
+{# Common Modes #}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/mode/multiplex.js') }}
-{{ asset_add('scripts.js', 'asset::editor-field_type/addon/wrap/hardwrap.js') }}
 {{ asset_add('scripts.js', 'asset::editor-field_type/addon/mode/overlay.js') }}
 
+{# Miscelaneous Addons #}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/scroll/annotatescrollbar.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/addon/wrap/hardwrap.js') }}
+
 {# Keymap #}
-{{ asset_add('scripts.js', 'asset::editor-field_type/keymap/pyrocms.js') }}
+{{ asset_add('scripts.js', 'asset::editor-field_type/keymap/phpstorm.js') }}
 
 {# Editor Theme #}
 {{ asset_add('styles.css', 'anomaly.field_type.editor::css/codemirror/theme/' ~ field_type.config.theme ~ '.css') }}
