@@ -6,6 +6,8 @@ $(document).on('ajaxComplete ready', function () {
 
     editors.forEach(function (textarea) {
 
+        textarea.setAttribute('data-initialized', 'initialized');
+
         var data = textarea.dataset;
         var height = data.height + 'px';
         var wrapper = textarea.parentElement;
@@ -59,5 +61,9 @@ $(document).on('ajaxComplete ready', function () {
             e.target.parentElement.classList.toggle('expanded');
             editor.setOption('fullScreen', !editor.getOption('fullScreen'));
         };
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+            editor.refresh();
+        })
     });
 });

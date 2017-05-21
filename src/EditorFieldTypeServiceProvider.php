@@ -21,7 +21,6 @@ class EditorFieldTypeServiceProvider extends AddonServiceProvider
      */
     public function register(EditorFieldType $fieldType)
     {
-
         $fieldType->on('entry_saved', EditorFieldTypeCallbacks::class . '@onEntrySaved');
         $fieldType->on('entry_deleted', EditorFieldTypeCallbacks::class . '@onEntryDeleted');
         $fieldType->on('entry_translation_saved', EditorFieldTypeCallbacks::class . '@onEntryTranslationSaved');
