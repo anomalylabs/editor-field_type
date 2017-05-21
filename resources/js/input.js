@@ -62,8 +62,14 @@ $(document).on('ajaxComplete ready', function () {
             editor.setOption('fullScreen', !editor.getOption('fullScreen'));
         };
 
+        $('[data-toggle="collapse"]').on('click', function () {
+            setTimeout(function () {
+                editor.refresh();
+            }, 100);
+        });
+
         $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
             editor.refresh();
-        })
+        });
     });
 });
