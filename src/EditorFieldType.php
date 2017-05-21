@@ -62,6 +62,20 @@ class EditorFieldType extends FieldType
     }
 
     /**
+     * Get the config.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        $config = parent::getConfig();
+
+        $config['loader'] = config('anomaly.field_type.editor::editor.modes.' . $config['mode'] . '.loader');
+
+        return $config;
+    }
+
+    /**
      * Get the file path.
      *
      * @return null|string
