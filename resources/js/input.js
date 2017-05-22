@@ -72,9 +72,5 @@ $(document).on('ajaxComplete ready', function () {
         $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
             editor.refresh();
         });
-
-        $(document).on('ajaxComplete', function () {
-            editor.refresh();
-        });
     });
 });
