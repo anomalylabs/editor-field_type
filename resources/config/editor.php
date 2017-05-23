@@ -9,7 +9,7 @@ return [
             'loader'    => 'twig',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/twig/twig.js',
+                'anomaly.field_type.editor::js/codemirror/mode/twig/twig.js',
             ],
         ],
         'html'       => [
@@ -18,11 +18,11 @@ return [
             'loader'    => 'htmlmixed',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/xml/xml.js',
-                'asset::editor-field_type/mode/javascript/javascript.js',
-                'asset::editor-field_type/mode/css/css.js',
-                'asset::editor-field_type/mode/vbscript/vbscript.js',
-                'asset::editor-field_type/mode/htmlmixed/htmlmixed.js',
+                'anomaly.field_type.editor::js/codemirror/mode/xml/xml.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/javascript.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/vbscript/vbscript.js',
+                'anomaly.field_type.editor::js/codemirror/mode/htmlmixed/htmlmixed.js',
             ],
         ],
         'css'        => [
@@ -31,7 +31,7 @@ return [
             'loader'    => 'css',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
             ],
         ],
         'javascript' => [
@@ -40,7 +40,7 @@ return [
             'loader'    => 'javascript',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/javascript/javascript.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/javascript.js',
             ],
         ],
         'markdown'   => [
@@ -49,8 +49,8 @@ return [
             'name'      => 'Markdown',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/xml/xml.js',
-                'asset::editor-field_type/mode/markdown/markdown.js',
+                'anomaly.field_type.editor::js/codemirror/mode/xml/xml.js',
+                'anomaly.field_type.editor::js/codemirror/mode/markdown/markdown.js',
             ],
         ],
         'scss'       => [
@@ -59,7 +59,7 @@ return [
             'name'      => 'SCSS',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
             ],
         ],
         'less'       => [
@@ -68,7 +68,7 @@ return [
             'name'      => 'LESS',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
             ],
         ],
         'json'       => [
@@ -77,8 +77,8 @@ return [
             'name'      => 'JSON',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/javascript/json.js',
-                'asset::editor-field_type/mode/javascript/json-.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/json.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/json-.js',
             ],
         ],
         'yaml'       => [
@@ -87,7 +87,7 @@ return [
             'name'      => 'YAML',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/yaml/yaml.js',
+                'anomaly.field_type.editor::js/codemirror/mode/yaml/yaml.js',
             ],
         ],
         'php'        => [
@@ -96,12 +96,12 @@ return [
             'name'      => 'PHP',
             'styles'    => [],
             'scripts'   => [
-                'asset::editor-field_type/mode/htmlmixed/htmlmixed.js',
-                'asset::editor-field_type/mode/xml/xml.js',
-                'asset::editor-field_type/mode/javascript/javascript.js',
-                'asset::editor-field_type/mode/css/css.js',
-                'asset::editor-field_type/mode/clike/clike.js',
-                'asset::editor-field_type/mode/php/php.js',
+                'anomaly.field_type.editor::js/codemirror/mode/htmlmixed/htmlmixed.js',
+                'anomaly.field_type.editor::js/codemirror/mode/xml/xml.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/javascript.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/clike/clike.js',
+                'anomaly.field_type.editor::js/codemirror/mode/php/php.js',
             ],
         ],
     ],
