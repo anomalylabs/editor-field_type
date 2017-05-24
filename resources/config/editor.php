@@ -6,9 +6,13 @@ return [
         'twig'       => [
             'extension' => 'twig',
             'name'      => 'Twig',
-            'loader'    => 'twig',
+            'loader'    => 'htmltwig',
             'styles'    => [],
             'scripts'   => [
+                'anomaly.field_type.editor::js/codemirror/mode/xml/xml.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/javascript.js',
+                'anomaly.field_type.editor::js/codemirror/mode/css/css.js',
+                'anomaly.field_type.editor::js/codemirror/mode/htmlmixed/htmlmixed.js',
                 'anomaly.field_type.editor::js/codemirror/mode/twig/twig.js',
             ],
         ],
