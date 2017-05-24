@@ -77,14 +77,20 @@
     <a href="#" class="fullscreen">{{ icon('expand') }}</a>
 
     <textarea
-            class="{{ field_type.class }}"
-            name="{{ field_type.input_name }}"
-            {% for key,value in field_type.config %}
-                data-{{ key }}="{{ value }}"
-            {% endfor %}
-            {{ html_attributes(field_type.attributes) }}
-            {{ field_type.disabled ? 'disabled' }}
-            {{ field_type.readonly ? 'readonly' }}>{{ field_type.value }}</textarea>
+        class="{{ field_type.class }}"
+        {% for key,value in field_type.config %}
+            data-{{ key }}="{{ value }}"
+        {% endfor %}
+        {{ html_attributes(field_type.attributes) }}
+        {{ field_type.disabled ? 'disabled' }}
+        {{ field_type.readonly ? 'readonly' }}
+        style="display:none"
+    ></textarea>
+
+    <textarea
+        class="code"
+        name="{{ field_type.input_name }}"
+    >{{ field_type.value }}</textarea>
 
 </div>
 
