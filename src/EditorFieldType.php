@@ -33,8 +33,9 @@ class EditorFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'theme' => 'monokai',
-        'mode'  => 'twig',
+        'theme'  => 'monokai',
+        'mode'   => 'twig',
+        'height' => 75,
     ];
 
     /**
@@ -59,6 +60,20 @@ class EditorFieldType extends FieldType
     public function __construct(Application $application)
     {
         $this->application = $application;
+    }
+
+    /**
+     * Get the config.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        $config = parent::getConfig();
+
+        $config['loader'] = config('anomaly.field_type.editor::editor.modes.' . $config['mode'] . '.loader');
+
+        return $config;
     }
 
     /**

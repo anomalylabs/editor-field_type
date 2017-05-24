@@ -27,9 +27,9 @@ return [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
-            'default_value' => 500,
-            'min'           => 200,
-            'step'          => 50,
+            'default_value' => 75,
+            'min'           => 50,
+            'step'          => 25,
         ],
     ],
     'word_wrap'     => [
