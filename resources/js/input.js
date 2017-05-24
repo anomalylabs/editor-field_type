@@ -1,3 +1,10 @@
+CodeMirror.defineMode('htmltwig', function (config, parserConfig) {
+    return CodeMirror.overlayMode(
+        CodeMirror.getMode(config, parserConfig.backdrop || 'text/html'),
+        CodeMirror.getMode(config, 'twig')
+    );
+});
+
 $(document).on('ajaxComplete ready', function () {
 
     /**
@@ -20,7 +27,7 @@ $(document).on('ajaxComplete ready', function () {
 
             var fullscreen = wrapper.querySelector('.fullscreen');
 
-            var editor = CodeMirror.fromTextArea(textarea, {
+            var editor = CodeMirror.fromTextArea(textarea.nextElementSibling, {
                 profile: 'xhtml',
                 lineNumbers: true,
                 lineWrapping: data.word_wrap,
