@@ -47,7 +47,10 @@ $(document).on('ajaxComplete ready', function () {
                         cm.setOption('fullScreen', !cm.getOption('fullScreen'));
                     },
                     Esc: function (cm) {
-                        if (cm.getOption('fullScreen')) {
+                        var doc = cm.getDoc();
+                        if (doc.getSelections().length > 1) {
+                            cm.execCommand('singleSelection');
+                        } else if (cm.getOption('fullScreen')) {
                             cm.setOption('fullScreen', false);
                         }
                     }
