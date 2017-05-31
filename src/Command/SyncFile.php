@@ -77,6 +77,7 @@ class SyncFile
          * has been updated, so write the content to the file.
          */
         if (!$config->get('app.debug')) {
+
             $this->dispatch(new PutFile($this->fieldType));
 
             $content = array_get($entry->getAttributes(), $this->fieldType->getField());
@@ -87,7 +88,9 @@ class SyncFile
          * since that is what we use anyways.
          */
         if (filemtime($path) < $entry->lastModified()->timestamp) {
+
             $this->dispatch(new PutFile($this->fieldType));
+           
             $content = array_get($entry->getAttributes(), $this->fieldType->getField());
         }
 
