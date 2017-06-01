@@ -2,11 +2,11 @@
  * Define a code mirror mode that uses html mixed,
  * and merges twig syntax into it.
  */
-CodeMirror.defineMode ("twig_html", function (config) {
-    return CodeMirror.multiplexingMode (
-        CodeMirror.getMode (config, "htmlmixed"), {
+CodeMirror.defineMode("twig_html", function (config) {
+    return CodeMirror.multiplexingMode(
+        CodeMirror.getMode(config, "htmlmixed"), {
             open: /{[%{#]/, close: /[#}%]}/,
-            mode: CodeMirror.getMode (config, "twig"),
+            mode: CodeMirror.getMode(config, "twig"),
             parseDelimiters: true
         }
     );
@@ -56,6 +56,7 @@ $(document).on('ajaxComplete ready', function () {
                 lineWiseCopyCut: true,
                 viewportMargin: Infinity,
                 autoCloseBrackets: true,
+                autoCloseTags: true,
                 scrollbarStyle: null,
                 highlightSelectionMatches: true,
                 keyMap: 'phpstorm',
@@ -64,6 +65,7 @@ $(document).on('ajaxComplete ready', function () {
                 styleActiveLine: false,
                 gutters: ['CodeMirror-lint-markers'],
                 extraKeys: {
+                    "Ctrl-Space": "autocomplete",
                     F10: function (cm) {
                         cm.setOption('fullScreen', !cm.getOption('fullScreen'));
                     },
