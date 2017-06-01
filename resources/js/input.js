@@ -1,3 +1,17 @@
+/**
+ * Define a code mirror mode that uses html mixed,
+ * and merges twig syntax into it.
+ */
+CodeMirror.defineMode ("twig_html", function (config) {
+    return CodeMirror.multiplexingMode (
+        CodeMirror.getMode (config, "htmlmixed"), {
+            open: /{[%{#]/, close: /[#}%]}/,
+            mode: CodeMirror.getMode (config, "twig"),
+            parseDelimiters: true
+        }
+    );
+}, "htmlmixed");
+
 $(document).on('ajaxComplete ready', function () {
 
     /**
@@ -19,6 +33,13 @@ $(document).on('ajaxComplete ready', function () {
             var wrapper = textarea.parentElement;
 
             var fullscreen = wrapper.querySelector('.fullscreen');
+
+            /**
+             * If twig is requested then use the fancy twig+html mode instead.
+             */
+            if (data.loader === 'twig') {
+                data.loader = 'twig_html';
+            }
 
             var editor = CodeMirror.fromTextArea(textarea, {
                 profile: 'xhtml',
