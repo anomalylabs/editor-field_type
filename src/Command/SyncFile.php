@@ -73,8 +73,9 @@ class SyncFile
         }
 
         /**
-         * If we're NOT debugging and we got this far then we know that the content
-         * has been updated, so write the content to the file.
+         * If we're NOT debugging and we got this
+         * far then we know that the content has been
+         * updated, so write the content to the file.
          */
         if (!$config->get('app.debug')) {
 
@@ -87,7 +88,7 @@ class SyncFile
          * If the database is newer then update the file
          * since that is what we use anyways.
          */
-        if (filemtime($path) < $entry->lastModified()->timestamp) {
+        if ($entry->lastModified() && filemtime($path) < $entry->lastModified()->timestamp) {
 
             $this->dispatch(new PutFile($this->fieldType));
            
