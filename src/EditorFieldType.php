@@ -73,6 +73,10 @@ class EditorFieldType extends FieldType
 
         $config['loader'] = config('anomaly.field_type.editor::editor.modes.' . $config['mode'] . '.loader');
 
+        if (array_get($config, 'word_wrap')) {
+            $config['word_wrap'] = filter_var(array_get($config, 'word_wrap'), FILTER_VALIDATE_BOOLEAN);
+        }
+
         return $config;
     }
 
