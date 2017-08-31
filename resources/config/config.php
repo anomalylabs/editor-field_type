@@ -1,23 +1,13 @@
 <?php
 
-use Illuminate\Contracts\Config\Repository;
+use Anomaly\EditorFieldType\Support\Config\ModesOptions;
 
 return [
     'mode'          => [
         'type'     => 'anomaly.field_type.select',
         'required' => true,
         'config'   => [
-            'options' => function (Repository $config) {
-                return array_combine(
-                    array_keys($config->get('anomaly.field_type.editor::editor.modes')),
-                    array_map(
-                        function ($mode) {
-                            return $mode['name'];
-                        },
-                        $config->get('anomaly.field_type.editor::editor.modes')
-                    )
-                );
-            },
+            'handler' => ModesOptions::class,
         ],
     ],
     'default_value' => [
