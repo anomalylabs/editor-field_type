@@ -66,6 +66,7 @@ CodeMirror.defineMode("twig_html", function (config) {
                     "Ctrl-Space": "autocomplete",
                     F10: function (cm) {
                         cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+                        fullscreen.classList.toggle('expanded');
                     },
                     Esc: function (cm) {
 
