@@ -12,7 +12,7 @@ CodeMirror.defineMode("twig_html", function (config) {
     );
 }, "htmlmixed");
 
-$(document).on('ajaxComplete ready', function () {
+(function (window, document) {
 
     /**
      * Wait 1/10 seconds as a fix for
@@ -20,19 +20,17 @@ $(document).on('ajaxComplete ready', function () {
      */
     setTimeout(function () {
 
-        var editors = document.querySelectorAll(
-            'textarea[data-provides="anomaly.field_type.editor"]:not([data-initialized])'
+        let editors = document.querySelectorAll(
+            'textarea[data-provides="anomaly.field_type.editor"]'
         );
 
         editors.forEach(function (textarea) {
 
-            textarea.setAttribute('data-initialized', 'initialized');
+            let data = textarea.dataset;
+            let height = data.height + 'px';
+            let wrapper = textarea.parentElement;
 
-            var data = textarea.dataset;
-            var height = data.height + 'px';
-            var wrapper = textarea.parentElement;
-
-            var fullscreen = wrapper.querySelector('.fullscreen');
+            let fullscreen = wrapper.querySelector('.fullscreen');
 
             /**
              * If twig is requested then use the fancy twig+html mode instead.
@@ -41,7 +39,7 @@ $(document).on('ajaxComplete ready', function () {
                 data.loader = 'twig_html';
             }
 
-            var editor = CodeMirror.fromTextArea(textarea, {
+            let editor = CodeMirror.fromTextArea(textarea, {
                 profile: 'xhtml',
                 lineNumbers: true,
                 lineWrapping: data.word_wrap,
@@ -70,20 +68,24 @@ $(document).on('ajaxComplete ready', function () {
                         cm.setOption('fullScreen', !cm.getOption('fullScreen'));
                     },
                     Esc: function (cm) {
-                        var doc = cm.getDoc();
+
+                        let doc = cm.getDoc();
+
                         if (doc.getSelections().length > 1) {
                             cm.execCommand('singleSelection');
                         } else if (cm.getOption('fullScreen')) {
                             cm.setOption('fullScreen', false);
                         }
+
+                        fullscreen.classList.toggle('expanded');
                     }
                 }
             });
 
             emmetCodeMirror(editor);
 
-            var cm = document.querySelector('.CodeMirror');
-            var cmScroll = document.querySelector('.CodeMirror-scroll');
+            let cm = document.querySelector('.CodeMirror');
+            let cmScroll = document.querySelector('.CodeMirror-scroll');
 
             cm.style.height = 'auto';
             cm.style.minHeight = height;
@@ -106,4 +108,4 @@ $(document).on('ajaxComplete ready', function () {
             });
         });
     }, 10);
-});
+})(window, document);
