@@ -1,109 +1,114 @@
-(function (window, document) {
-  /**
-   * Define a code mirror mode that uses html mixed,
-   * and merges twig syntax into it.
-   */
-  CodeMirror.defineMode(
-    'twig_html',
-    function (config) {
-      return CodeMirror.multiplexingMode(
-        CodeMirror.getMode(config, 'htmlmixed'), {
-          open: /{[%{#]/,
-          close: /[#}%]}/,
-          mode: CodeMirror.getMode(config, 'twig'),
-          parseDelimiters: true,
+/**
+ * Define a code mirror mode that uses html mixed,
+ * and merges twig syntax into it.
+ */
+CodeMirror.defineMode("twig_html", function (config) {
+    return CodeMirror.multiplexingMode(
+        CodeMirror.getMode(config, "htmlmixed"), {
+            open: /{[%{#]/,
+            close: /[#}%]}/,
+            mode: CodeMirror.getMode(config, "twig"),
+            parseDelimiters: true
         }
-      );
-    },
-    'htmlmixed'
-  );
-
-  document.addEventListener('DOMContentLoaded', function () {
-
-    const textareas = document.querySelectorAll(
-      'textarea[data-provides="anomaly.field_type.editor"]'
     );
+}, "htmlmixed");
 
-    textareas.forEach(function (textarea) {
+(function (window, document) {
 
-      const data = textarea.dataset;
-      const height = data.height + 'px';
-      const wrapper = textarea.parentElement;
-      const fullscreen = wrapper.querySelector('.fullscreen');
+    /**
+     * Wait 1/10 seconds as a fix for
+     * the grid / repeater field types.
+     */
+    setTimeout(function () {
 
-      if (data.loader === 'twig') {
-        data.loader = 'twig_html';
-      }
+        let editors = document.querySelectorAll(
+            'textarea[data-provides="anomaly.field_type.editor"]'
+        );
 
-      let editor = CodeMirror.fromTextArea(textarea, {
-        profile: data.profile || 'xhtml',
-        lineNumbers: data.line_numbers || true,
-        lineWrapping: data.word_wrap || true,
-        mode: data.loader || 'htmlmixed',
-        theme: data.theme || 'material',
-        tabSize: data.tab_size || 2,
-        indentUnit: data.indent_unit || 2,
-        indentWithTabs: 'spaces',
-        showCursorWhenSelecting: true,
-        cursorScrollMargin: 2,
-        cursorHeight: 0.95,
-        lineWiseCopyCut: true,
-        viewportMargin: Infinity,
-        autoCloseBrackets: true,
-        autoCloseTags: true,
-        scrollbarStyle: null,
-        highlightSelectionMatches: true,
-        keyMap: 'sublime',
-        lint: true,
-        matchBrackets: true,
-        styleActiveLine: true,
-        gutters: ['CodeMirror-lint-markers'],
-        extraKeys: {
-          'Ctrl-Space': 'autocomplete',
+        editors.forEach(function (textarea) {
 
-          'F10': function (cm) {
-            cm.setOption('fullScreen', !cm.getOption('fullScreen'));
-            fullscreen.classList.toggle('expanded');
-          },
+            let data = textarea.dataset;
+            let height = data.height + 'px';
+            let wrapper = textarea.parentElement;
 
-          'Esc': function (cm) {
-            const doc = cm.getDoc();
+            let fullscreen = wrapper.querySelector('.fullscreen');
 
-            if (doc.getSelections().length > 1) {
-              cm.execCommand('singleSelection');
-            } else if (cm.getOption('fullScreen')) {
-              cm.setOption('fullScreen', false);
+            /**
+             * If twig is requested then use the fancy twig+html mode instead.
+             */
+            if (data.loader === 'twig') {
+                data.loader = 'twig_html';
             }
 
-            fullscreen.classList.toggle('expanded');
-          },
-        },
-      });
+            let editor = CodeMirror.fromTextArea(textarea, {
+                profile: 'xhtml',
+                lineNumbers: true,
+                lineWrapping: data.word_wrap,
+                mode: data.loader || 'htmlmixed',
+                theme: data.theme || 'material',
+                tabSize: data.tab_size || 4,
+                indentUnit: 4,
+                indentWithTabs: 'spaces',
+                showCursorWhenSelecting: true,
+                cursorScrollMargin: 2,
+                cursorHeight: 0.95,
+                lineWiseCopyCut: true,
+                viewportMargin: Infinity,
+                autoCloseBrackets: true,
+                autoCloseTags: true,
+                scrollbarStyle: null,
+                highlightSelectionMatches: true,
+                keyMap: 'phpstorm',
+                lint: true,
+                matchBrackets: true,
+                styleActiveLine: false,
+                gutters: ['CodeMirror-lint-markers'],
+                extraKeys: {
+                    "Ctrl-Space": "autocomplete",
+                    F10: function (cm) {
+                        cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+                        fullscreen.classList.toggle('expanded');
+                    },
+                    Esc: function (cm) {
 
-      emmetCodeMirror(editor);
+                        let doc = cm.getDoc();
 
-      const cm = document.querySelector('.CodeMirror');
-      const cmScroll = document.querySelector('.CodeMirror-scroll');
+                        if (doc.getSelections().length > 1) {
+                            cm.execCommand('singleSelection');
+                        } else if (cm.getOption('fullScreen')) {
+                            cm.setOption('fullScreen', false);
+                        }
 
-      cm.style.height = 'auto';
-      cm.style.minHeight = height;
-      cmScroll.style.minHeight = height;
+                        fullscreen.classList.toggle('expanded');
+                    }
+                }
+            });
 
-      fullscreen.onclick = function (e) {
-        e.preventDefault();
-        e.target.parentElement.classList.toggle('expanded');
-        editor.setOption('fullScreen', !editor.getOption('fullScreen'));
-      };
+            emmetCodeMirror(editor);
 
-      $('[data-toggle="collapse"]').on('click', function () {
-        setTimeout(function () {
-          editor.refresh();
-        }, 100);
-      });
+            let cm = document.querySelector('.CodeMirror');
+            let cmScroll = document.querySelector('.CodeMirror-scroll');
 
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-        editor.refresh();
-      });
-    });
-  });
+            cm.style.height = 'auto';
+            cm.style.minHeight = height;
+            cmScroll.style.minHeight = height;
+
+            fullscreen.onclick = function (e) {
+                e.preventDefault();
+                e.target.parentElement.classList.toggle('expanded');
+                editor.setOption('fullScreen', !editor.getOption('fullScreen'));
+            };
+
+            $('[data-toggle="collapse"]').on('click', function () {
+                setTimeout(function () {
+                    editor.refresh();
+                }, 100);
+            });
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+                editor.refresh();
+            });
+        });
+    }, 10);
+
 })(window, document);
