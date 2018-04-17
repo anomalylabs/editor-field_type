@@ -81,7 +81,14 @@ class EditorFieldTypeStorage
         $namespace = $entry->getStreamNamespace();
         $directory = $entry->getEntryId();
 
-        return "{$namespace}/{$slug}/{$directory}";
+        return implode(
+            DIRECTORY_SEPARATOR,
+            [
+                $namespace,
+                $slug,
+                $directory,
+            ]
+        );
     }
 
     /**
@@ -98,7 +105,13 @@ class EditorFieldTypeStorage
             return null;
         }
 
-        return "{$directory}/{$filename}";
+        return implode(
+            DIRECTORY_SEPARATOR,
+            [
+                $directory,
+                $filename
+            ]
+        );
     }
 
     /**
