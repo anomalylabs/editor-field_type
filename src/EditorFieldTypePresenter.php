@@ -78,18 +78,6 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the rendered content.
-     *
-     * @param  array  $payload
-     * @return string
-     * @deprecated deprecated since version 2.0
-     */
-    public function rendered(array $payload = [])
-    {
-        return $this->render($payload);
-    }
-
-    /**
      * Return the parsed content.
      *
      * @param  array  $payload
@@ -98,18 +86,6 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     public function parse(array $payload = [])
     {
         return $this->template->render($this->content(), (new Decorator())->decorate($payload));
-    }
-
-    /**
-     * Return the parsed content.
-     *
-     * @param  array  $payload
-     * @return string
-     * @deprecated deprecated since version 2.0
-     */
-    public function parsed(array $payload = [])
-    {
-        return $this->parse($payload);
     }
 
     /**
