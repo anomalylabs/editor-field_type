@@ -88,9 +88,3 @@
             {{ field_type.readonly ? 'readonly' }}>{{ field_type.value }}</textarea>
 
 </div>
-
-{% if config('app.debug') and field_type.storage_path %}
-    <small class="text-muted hidden-md">
-        {{ field_type.storage_path }}
-    </small>
-{% endif %}
