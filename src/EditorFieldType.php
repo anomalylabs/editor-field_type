@@ -18,7 +18,7 @@ class EditorFieldType extends FieldType
      *
      * @var string
      */
-    protected $columnType = 'text';
+    protected $columnType = 'longtext';
 
     /**
      * The input view.
