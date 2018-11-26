@@ -22,7 +22,7 @@ CodeMirror.defineMode("twig_html", function (config) {
     setTimeout(function () {
 
         let editors = document.querySelectorAll(
-            'textarea[data-provides="anomaly.field_type.editor"]'
+            'textarea[data-provides="anomaly.field_type.editor"]:not([data-editor-init])'
         );
 
         editors.forEach(function (textarea) {
@@ -86,8 +86,12 @@ CodeMirror.defineMode("twig_html", function (config) {
 
             emmetCodeMirror(editor);
 
-            let cm = document.querySelector('.CodeMirror');
-            let cmScroll = document.querySelector('.CodeMirror-scroll');
+            /**
+             * The CodeMirror div is created
+             * immediately after the textarea.
+             */
+            let cm = textarea.parentElement.querySelector('.CodeMirror');
+            let cmScroll = cm.querySelector('.CodeMirror-scroll');
 
             cm.style.height = 'auto';
             cm.style.minHeight = height;
@@ -108,6 +112,9 @@ CodeMirror.defineMode("twig_html", function (config) {
             $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
                 editor.refresh();
             });
+
+            // Mark this editor as initialised
+            textarea.setAttribute('data-editor-init', true);
         });
     }, 10);
 
