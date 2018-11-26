@@ -87,7 +87,10 @@ CodeMirror.defineMode("twig_html", function (config) {
 
             emmetCodeMirror(editor);
 
-            // The CodeMirror div is created immediately after the textarea
+            /**
+             * The CodeMirror div is created
+             * immediately after the textarea.
+             */
             let cm = textarea.parentElement.querySelector('.CodeMirror');
             let cmScroll = cm.querySelector('.CodeMirror-scroll');
 
