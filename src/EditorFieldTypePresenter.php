@@ -1,9 +1,8 @@
 <?php namespace Anomaly\EditorFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
-use Anomaly\Streams\Platform\Support\Decorator;
+use Anomaly\Streams\Platform\Support\Markdown;
 use Anomaly\Streams\Platform\Support\Template;
-use Illuminate\View\Factory;
 
 /**
  * Class EditorFieldTypePresenter
@@ -14,13 +13,6 @@ use Illuminate\View\Factory;
  */
 class EditorFieldTypePresenter extends FieldTypePresenter
 {
-
-    /**
-     * The view factory.
-     *
-     * @var Factory
-     */
-    protected $view;
 
     /**
      * The decorated field type.
@@ -40,13 +32,11 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Create a new EditorFieldTypePresenter instance.
      *
-     * @param Factory  $view
      * @param Template $template
      * @param          $object
      */
-    public function __construct(Factory $view, Template $template, $object)
+    public function __construct(Template $template, $object)
     {
-        $this->view     = $view;
         $this->template = $template;
 
         parent::__construct($object);
@@ -59,7 +49,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function path()
     {
-        if (in_array($this->object->extension(), ['html', 'twig'])) {
+        if (in_array($this->object->extension(), ['html', 'twig', 'md'])) {
             return $this->object->getViewPath();
         } else {
             return $this->object->getAssetPath();
@@ -69,23 +59,27 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return string
      */
     public function render(array $payload = [])
     {
-        return $this->view->make($this->path(), $payload)->render();
+        return $this->template->render($this->parse(), $payload);
     }
 
     /**
      * Return the parsed content.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return string
      */
-    public function parse(array $payload = [])
+    public function parse()
     {
-        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
+        if ($this->object->extension() == 'md') {
+            return (new Markdown())->parse($this->object->getValue());
+        }
+
+        return $this->object->getValue();
     }
 
     /**
@@ -105,11 +99,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function __toString()
     {
-        if (!$this->object->getValue()) {
-            return '';
-        }
-
-        if (in_array($this->object->extension(), ['html', 'twig'])) {
+        if (in_array($this->object->extension(), ['html', 'twig', 'md'])) {
             return $this->render();
         } else {
             return $this->content();

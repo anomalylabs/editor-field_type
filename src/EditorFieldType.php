@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
+use Anomaly\Streams\Platform\Support\Template;
 
 /**
  * Class EditorFieldType
@@ -39,11 +40,11 @@ class EditorFieldType extends FieldType
     ];
 
     /**
-     * The storage handler.
+     * The template utility.
      *
-     * @var null|EditorFieldTypeStorage
+     * @var Template
      */
-    protected $storage = null;
+    protected $template;
 
     /**
      * The application utility.
@@ -55,10 +56,12 @@ class EditorFieldType extends FieldType
     /**
      * Create a new EditorFieldType instance.
      *
+     * @param Template $template
      * @param Application $application
      */
-    public function __construct(Application $application)
+    public function __construct(Template $template, Application $application)
     {
+        $this->template    = $template;
         $this->application = $application;
     }
 
@@ -87,7 +90,7 @@ class EditorFieldType extends FieldType
      */
     public function getFilePath()
     {
-        return $this->storage()->path();
+        return str_replace('storage::', '', $this->template->asset($this->getValue(), $this->extension()));
     }
 
     /**
@@ -97,7 +100,7 @@ class EditorFieldType extends FieldType
      */
     public function getStoragePath()
     {
-        return $this->storage()->storagePath();
+        return $this->application->getStoragePath($this->getFilePath());
     }
 
     /**
@@ -107,7 +110,7 @@ class EditorFieldType extends FieldType
      */
     public function getViewPath()
     {
-        return $this->storage()->viewPath();
+        return 'storage::' . str_replace(['.md', '.twig', '.html'], '', $this->getFilePath());
     }
 
     /**
@@ -117,7 +120,7 @@ class EditorFieldType extends FieldType
      */
     public function getAssetPath()
     {
-        return $this->storage()->assetPath();
+        return 'storage::' . $this->getFilePath();
     }
 
     /**
@@ -127,7 +130,7 @@ class EditorFieldType extends FieldType
      */
     protected function getFileName()
     {
-        return $this->storage()->filename();
+        return basename($this->getFilePath());
     }
 
     /**
@@ -162,18 +165,4 @@ class EditorFieldType extends FieldType
         return config('anomaly.field_type.editor::editor.theme');
     }
 
-    /**
-     * Return the storage class.
-     */
-    public function storage()
-    {
-        if (!$this->storage) {
-            $this->storage = app()->make(
-                $this->config('storage', EditorFieldTypeStorage::class),
-                ['fieldType' => $this]
-            );
-        }
-
-        return $this->storage;
-    }
 }
