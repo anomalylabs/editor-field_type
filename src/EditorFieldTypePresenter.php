@@ -64,7 +64,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
-        return $this->template->render($this->parse(), $payload);
+        return (string)$this->template->render($this->parse(), $payload);
     }
 
     /**
@@ -98,11 +98,7 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      * @return string
      */
     public function __toString()
-    {
-        if (!$this->object->getValue()) {
-            return '';
-        }
-        
+    {        
         if (in_array($this->object->extension(), ['html', 'twig', 'md'])) {
             return $this->render();
         } else {
