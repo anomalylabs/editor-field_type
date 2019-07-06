@@ -25,6 +25,10 @@ CodeMirror.defineMode("twig_html", function (config) {
             'textarea[data-provides="anomaly.field_type.editor"]:not([data-editor-init])'
         );
 
+        let triggers = Array.prototype.slice.call(
+            document.querySelectorAll('a[data-toggle="tab"], a[data-toggle="lang"]')
+        );
+
         editors.forEach(function (textarea) {
 
             let data = textarea.dataset;
@@ -111,6 +115,14 @@ CodeMirror.defineMode("twig_html", function (config) {
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
                 editor.refresh();
+            });
+
+            triggers.forEach(function (trigger) {
+                trigger.addEventListener('click', function () {
+                    setTimeout(function () {
+                        editor.refresh();
+                    }, 100);
+                });
             });
 
             // Mark this editor as initialised
