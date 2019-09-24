@@ -66,34 +66,6 @@ class EditorFieldType extends FieldType
     }
 
     /**
-     * Get the config.
-     *
-     * @return array
-     */
-    public function getConfig()
-    {
-        $config = parent::getConfig();
-
-        $config['loader'] = config('anomaly.field_type.editor::editor.modes.' . $config['mode'] . '.loader');
-
-        if (array_get($config, 'word_wrap')) {
-            $config['word_wrap'] = filter_var(array_get($config, 'word_wrap'), FILTER_VALIDATE_BOOLEAN);
-        }
-
-        return $config;
-    }
-
-    /**
-     * Get the file path.
-     *
-     * @return null|string
-     */
-    public function getFilePath()
-    {
-        return str_replace('storage::', '', $this->template->asset($this->getValue(), $this->extension()));
-    }
-
-    /**
      * Get the storage path.
      *
      * @return null|string
@@ -104,33 +76,13 @@ class EditorFieldType extends FieldType
     }
 
     /**
-     * Get the view path.
+     * Get the file path.
      *
-     * @return string
+     * @return null|string
      */
-    public function getViewPath()
+    public function getFilePath()
     {
-        return 'storage::' . str_replace(['.md', '.twig', '.html'], '', $this->getFilePath());
-    }
-
-    /**
-     * Get the asset path.
-     *
-     * @return string
-     */
-    public function getAssetPath()
-    {
-        return 'storage::' . $this->getFilePath();
-    }
-
-    /**
-     * Get the storage file name.
-     *
-     * @return string
-     */
-    protected function getFileName()
-    {
-        return basename($this->getFilePath());
+        return str_replace('storage::', '', $this->template->asset($this->getValue(), $this->extension()));
     }
 
     /**
@@ -156,6 +108,44 @@ class EditorFieldType extends FieldType
     }
 
     /**
+     * Get the config.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        $config = parent::getConfig();
+
+        $config['loader'] = config('anomaly.field_type.editor::editor.modes.' . $config['mode'] . '.loader');
+
+        if (array_get($config, 'word_wrap')) {
+            $config['word_wrap'] = filter_var(array_get($config, 'word_wrap'), FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return $config;
+    }
+
+    /**
+     * Get the view path.
+     *
+     * @return string
+     */
+    public function getViewPath()
+    {
+        return 'storage::' . str_replace(['.md', '.twig', '.html'], '', $this->getFilePath());
+    }
+
+    /**
+     * Get the asset path.
+     *
+     * @return string
+     */
+    public function getAssetPath()
+    {
+        return 'storage::' . $this->getFilePath();
+    }
+
+    /**
      * Return the editor theme.
      *
      * @return mixed
@@ -165,4 +155,13 @@ class EditorFieldType extends FieldType
         return config('anomaly.field_type.editor::editor.theme');
     }
 
+    /**
+     * Get the storage file name.
+     *
+     * @return string
+     */
+    protected function getFileName()
+    {
+        return basename($this->getFilePath());
+    }
 }

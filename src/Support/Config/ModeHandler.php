@@ -1,7 +1,7 @@
 <?php namespace Anomaly\EditorFieldType\Support\Config;
 
 use Anomaly\SelectFieldType\SelectFieldType;
-use Illuminate\Contracts\Config\Repository;
+
 
 /**
  * Class ModeHandler
@@ -23,12 +23,12 @@ class ModeHandler
     {
         $fieldType->setOptions(
             array_combine(
-                array_keys($config->get('anomaly.field_type.editor::editor.modes')),
+                array_keys(config('anomaly.field_type.editor::editor.modes')),
                 array_map(
                     function ($mode) {
                         return $mode['name'];
                     },
-                    $config->get('anomaly.field_type.editor::editor.modes')
+                    config('anomaly.field_type.editor::editor.modes')
                 )
             )
         );

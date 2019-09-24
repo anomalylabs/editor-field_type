@@ -57,6 +57,20 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Return the parsed content.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        if (in_array($this->object->extension(), ['html', 'twig', 'md'])) {
+            return $this->render();
+        } else {
+            return $this->content();
+        }
+    }
+
+    /**
      * Return the rendered content.
      *
      * @param  array $payload
@@ -90,19 +104,5 @@ class EditorFieldTypePresenter extends FieldTypePresenter
     public function content()
     {
         return $this->object->getValue();
-    }
-
-    /**
-     * Return the parsed content.
-     *
-     * @return string
-     */
-    public function __toString()
-    {        
-        if (in_array($this->object->extension(), ['html', 'twig', 'md'])) {
-            return $this->render();
-        } else {
-            return $this->content();
-        }
     }
 }
