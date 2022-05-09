@@ -82,8 +82,7 @@ return [
             'name'      => 'JSON',
             'styles'    => [],
             'scripts'   => [
-                'anomaly.field_type.editor::js/codemirror/mode/javascript/json.js',
-                'anomaly.field_type.editor::js/codemirror/mode/javascript/json-.js',
+                'anomaly.field_type.editor::js/codemirror/mode/javascript/javascript.js'
             ],
         ],
         'yaml'       => [
