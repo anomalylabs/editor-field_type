@@ -110,6 +110,23 @@ class EditorFieldType extends FieldType
      */
     public function getViewPath()
     {
+        if ($this->extension() == 'html') {
+
+            /*
+             * Wrap the value in single-quoted Twig string
+             * literals so the view outputs it without parsing.
+             * Chunked to keep each literal within the lexer's
+             * PCRE stack limit.
+             */
+            $literal = '';
+
+            foreach (str_split((string)$this->getValue(), 2048) as $chunk) {
+                $literal .= "{{ '" . addcslashes($chunk, "\\'") . "'|raw }}";
+            }
+
+            return 'storage::' . str_replace(['storage::', '.twig'], '', $this->template->asset($literal, 'twig'));
+        }
+
         return 'storage::' . str_replace(['.md', '.twig', '.html'], '', $this->getFilePath());
     }
 

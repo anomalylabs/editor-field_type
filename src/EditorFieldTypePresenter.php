@@ -64,6 +64,10 @@ class EditorFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
+        if ($this->object->extension() == 'html') {
+            return (string)$this->object->getValue();
+        }
+
         return (string)$this->template->render($this->parse(), $payload);
     }
 
